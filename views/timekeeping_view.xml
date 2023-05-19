@@ -42,14 +42,15 @@
       <search>
         <field name="user_id" />
         <field name="product_id" />
+        <!-- Filters -->
         <filter string="Today" name="filter_today"
           domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+        <!-- GroupBy -->
         <group expand="1" string="Group By">
           <filter string="User" name="user_id" context="{'group_by':'user_id'}" />
           <filter string="Product" name="product_id" context="{'group_by':'product_id'}" />
           <filter string="Date" name="date" context="{'group_by':'date'}" />
         </group>
-        <!-- <aggregate string="Sum of Pay" name="pay_sum" field="pay" function="sum" /> -->
       </search>
     </field>
   </record>
