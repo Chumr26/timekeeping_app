@@ -49,6 +49,7 @@
           <filter string="Product" name="product_id" context="{'group_by':'product_id'}" />
           <filter string="Date" name="date" context="{'group_by':'date'}" />
         </group>
+        <!-- <aggregate string="Sum of Pay" name="pay_sum" field="pay" function="sum" /> -->
       </search>
     </field>
   </record>
