@@ -1,5 +1,5 @@
 <odoo>
-<!-- form view -->
+  <!-- form view -->
   <record id="view_form_timekeeping" model="ir.ui.view">
     <field name="name">Timekeeping Form</field>
     <field name="model">timekeeping.table</field>
@@ -29,13 +29,32 @@
         <field name="user_id" width="100" />
         <field name="product_id" width="150" />
         <field name="quantity" width="80" />
-        <field name="pay" width="80"/>
+        <field name="pay" width="80" />
         <field name="date" width="120" />
       </tree>
     </field>
   </record>
-  <!-- tree view editable -->
-  <!-- <record id="view_tree_timekeeping_edit" model="ir.ui.view">
+  <!-- search view -->
+  <record id="view_search_timekeeping" model="ir.ui.view">
+    <field name="name">Timekeeping Filters</field>
+    <field name="model">timekeeping.table</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="user_id" />
+        <field name="product_id" />
+        <filter string="Today" name="filter_today"
+          domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+        <group expand="1" string="Group By">
+          <filter string="User" name="user_id" context="{'group_by':'user_id'}" />
+          <filter string="Product" name="product_id" context="{'group_by':'product_id'}" />
+          <filter string="Date" name="date" context="{'group_by':'date'}" />
+        </group>
+      </search>
+    </field>
+  </record>
+</odoo>
+<!-- tree view editable -->
+<!-- <record id="view_tree_timekeeping_edit" model="ir.ui.view">
     <field name="name">Timekeeping List Edit</field>
     <field name="model">timekeeping.table</field>
     <field name="arch" type="xml">
@@ -47,19 +66,3 @@
       </tree>
     </field>
   </record> -->
-  <!-- search view -->
-  <record id="view_search_timekeeping" model="ir.ui.view">
-    <field name="name">Timekeeping Filters</field>
-    <field name="model">timekeeping.table</field>
-    <field name="arch" type="xml">
-      <search>
-        <field name="user_id" />
-        <field name="product_id" />
-        <filter string="Today" name="filter_today"
-          domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
-        <!-- <filter string="This Week" name="filter_this_week"
-          domain="[('date', '&gt;=', context_today().start_of('week').strftime('%Y-%m-%d')), ('date', '&lt;=', context_today().end_of('week').strftime('%Y-%m-%d'))]" /> -->
-      </search>
-    </field>
-  </record>
-</odoo>
