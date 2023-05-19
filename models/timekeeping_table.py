@@ -28,4 +28,3 @@ class Timekeeping(models.Model):
     # _searchable = [
     #     (_search_this_week, 'This Week'),
     # ]
-something = 0
