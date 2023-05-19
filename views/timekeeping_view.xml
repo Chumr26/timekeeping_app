@@ -13,7 +13,6 @@
             </group>
             <group name="group_right">
               <field name="quantity" />
-              <field name="pay" />
               <field name="date" />
             </group>
           </group>
