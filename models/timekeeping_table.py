@@ -10,7 +10,7 @@ class Timekeeping(models.Model):
         "product.product", string="Product", required=True)
     quantity = fields.Integer(string="Quantity")
     date = fields.Date(default=lambda self: fields.Date.today())
-    pay = fields.Float(string="Pay", compute="_compute_pay")   
+    pay = fields.Float(string="Pay", compute="_compute_pay",store=True)   
 
     @api.depends("product_id.list_price","quantity")
     def _compute_pay(self):
