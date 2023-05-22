@@ -7,11 +7,16 @@ class Timekeeping(models.Model):
     _description = "Timekeeping"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
-    partner_id = fields.Many2one("res.partner")
-    product_id = fields.Many2one(
-        "product.product", required=True)
-    quantity = fields.Integer()
-    date = fields.Date(default=lambda self: fields.Date.today())
+    partner_id = fields.Many2one(
+        "res.partner",
+        delegate=True,
+        ondelete="cascade",
+        required=True,
+        track_visibility="always",
+    )
+    product_id = fields.Many2one("product.product", required=True, track_visibility="always",)
+    quantity = fields.Integer(track_visibility="always")
+    date = fields.Date(default=lambda self: fields.Date.today(), track_visibility="always",)
     pay = fields.Float(compute="_compute_pay", store=True)
     currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id.id)
 
