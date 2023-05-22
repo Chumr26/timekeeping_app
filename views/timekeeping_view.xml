@@ -26,12 +26,12 @@
     <field name="model">timekeeping.table</field>
     <field name="arch" type="xml">
       <tree>
-        <field name="user_id" width="100" />
-        <field name="product_id" width="150" />
-        <field name="quantity" width="80" />
-        <field name="pay" width="80" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+        <field name="date" string="Ngày" width="120"/>
+        <field name="user_id" string="Nhân viên" width="100"/>
+        <field name="product_id" string="Sản phẩm" width="150"/>
+        <field name="quantity" string="Số lượng" width="80"/>
+        <field name="pay" widget="monetary" string="Thành tiền" width="80" options="{'currency_field': 'currency_id'}" optional="hide"/>
         <field name="currency_id" invisible="1"/> <!-- must put it here to show the sympol -->
-        <field name="date" width="120" />
       </tree>
     </field>
   </record>

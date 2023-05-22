@@ -6,13 +6,13 @@ class Timekeeping(models.Model):
     _name = "timekeeping.table"
     _description = "Timekeeping"
 
-    user_id = fields.Many2one("res.partner", string="User")
+    user_id = fields.Many2one("res.partner")
     product_id = fields.Many2one(
-        "product.product", string="Product", required=True)
-    quantity = fields.Integer(string="Quantity")
+        "product.product", required=True)
+    quantity = fields.Integer()
     date = fields.Date(default=lambda self: fields.Date.today())
-    pay = fields.Float(string="Pay", compute="_compute_pay", store=True)
-    currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id.id)
+    pay = fields.Float(compute="_compute_pay", store=True)
+    currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id.id)
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):
