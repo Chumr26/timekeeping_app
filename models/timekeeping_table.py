@@ -5,8 +5,9 @@ from datetime import datetime, timedelta
 class Timekeeping(models.Model):
     _name = "timekeeping.table"
     _description = "Timekeeping"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
 
-    user_id = fields.Many2one("res.partner")
+    partner_id = fields.Many2one("res.partner")
     product_id = fields.Many2one(
         "product.product", required=True)
     quantity = fields.Integer()
