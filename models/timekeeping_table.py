@@ -12,6 +12,7 @@ class Timekeeping(models.Model):
     quantity = fields.Integer(string="Quantity")
     date = fields.Date(default=lambda self: fields.Date.today())
     pay = fields.Float(string="Pay", compute="_compute_pay", store=True)
+    currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id.id)
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):
