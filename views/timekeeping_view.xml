@@ -68,16 +68,3 @@
     </field>
   </record>
 </odoo>
-<!-- tree view editable -->
-<!-- <record id="view_tree_timekeeping_edit" model="ir.ui.view">
-    <field name="name">Timekeeping List Edit</field>
-    <field name="model">timekeeping.table</field>
-    <field name="arch" type="xml">
-      <tree editable="top">
-        <field name="user_id" width="100" />
-        <field name="product_id" width="150" />
-        <field name="quantity" width="80" />
-        <field name="date" width="120" />
-      </tree>
-    </field>
-  </record> -->
