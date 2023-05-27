@@ -21,6 +21,11 @@ class Timekeeping(models.Model):
     currency_id = fields.Many2one(
         'res.currency', default=lambda self: self.env.company.currency_id.id)
     location_id = fields.Many2one("stock.location", default=8)
+    worker_id = fields.Many2one(
+        "timekeeping.many",
+        required=True,
+        ondelete="cascade",
+    )
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):

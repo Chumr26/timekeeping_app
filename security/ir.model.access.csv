@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_timekeeping_manager,Timekeeping Manager,timekeeping_app.model_timekeeping_table,base.group_user,1,1,1,1
+many_user,Many User,model_timekeeping_many,base.group_user,1,1,1,1

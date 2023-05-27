@@ -2,25 +2,25 @@
     <!-- Action to open the Book list -->
     <record id="action_timekeeping_table" model="ir.actions.act_window">
         <field name="name">Timekeeping Table</field>
-        <!-- <field name="view_id" ref="timekeeping_app.view_tree_timekeeping"/> -->
         <field name="res_model">timekeeping.table</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <!-- <record id="action_timekeeping_table2" model="ir.actions.act_window">
-        <field name="name">List</field>
-        <field name="view_id" ref="timekeeping_app.view_tree_timekeeping_edit"/>
-        <field name="res_model">timekeeping.table</field>
-        <field name="view_mode">tree</field>
-    </record> -->
     <!-- Timekeeping App Menu -->
     <!-- Menu item to open the Book list -->
     <menuitem id="menu_timekeeping_table"
         name="Timekeeping"
         action="action_timekeeping_table"
     />
-    <!-- <menuitem id="menu_timekeeping_test"
-        name="List View"
+    <record id="action_timekeeping_many"
+        model="ir.actions.act_window">
+        <field name="name">Many</field>
+        <field name="res_model">timekeeping.many</field>
+        <field name="view_mode">tree,form</field>
+        <field name="views">view_tree_many,view_form_many</field>
+    </record>
+    <menuitem id="menu_timekeeping_many"
+        name="Many"
+        action="action_timekeeping_many"
         parent="menu_timekeeping_table"
-        action="action_timekeeping_table2"
-    /> -->
+    />
 </odoo>

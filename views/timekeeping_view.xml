@@ -1,4 +1,5 @@
 <odoo>
+  <!-- view for timekeeping.table -->
   <!-- form view -->
   <record id="view_form_timekeeping" model="ir.ui.view">
     <field name="name">Timekeeping Form</field>
@@ -45,6 +46,45 @@
           options="{'currency_field': 'currency_id'}" optional="hide" />
         <field name="currency_id" invisible="1" /> <!-- must put it here to show the sympol -->
       </tree>
+    </field>
+  </record>
+  <!-- view for timekeeping.many -->
+  <!-- tree view -->
+  <record id="view_tree_many" model="ir.ui.view">
+    <field name="name">Many Tree</field>
+    <field name="model">timekeeping.many</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="date" />
+        <field name="manager_id" />
+      </tree>
+    </field>
+  </record>
+  <!-- form view -->
+  <record id="view_form_many" model="ir.ui.view">
+    <field name="name">Many Form</field>
+    <field name="model">timekeeping.many</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="manager_id" />
+            <field name="date" />
+          </group>
+          <field name="line_ids">
+            <tree editable="bottom">
+              <field name="partner_id" string="Nhân viên" width="100" />
+              <field name="product_id" string="Sản phẩm" width="150" />
+              <field name="quantity" string="Số lượng" width="80" />
+              <field name="pay" widget="monetary" string="Thành tiền"
+                width="80"
+                options="{'currency_field': 'currency_id'}"
+                optional="hide" />
+              <field name="currency_id" invisible="1" /> <!-- must put it here to show the sympol -->
+            </tree>
+          </field>
+        </sheet>
+      </form>
     </field>
   </record>
   <!-- search view -->
