@@ -1,4 +1,4 @@
-from odoo import models, fields, api #type:ignore
+from odoo import models, fields, api  # type:ignore
 
 
 class Timekeeping(models.Model):
@@ -11,16 +11,30 @@ class Timekeeping(models.Model):
         delegate=True,
         ondelete="cascade",
         required=True,
-        track_visibility="always",)
+        track_visibility="always",
+        string="Nhân viên",)
     product_id = fields.Many2one(
-        "product.product", required=True, track_visibility="always",)
-    quantity = fields.Float(track_visibility="always")
-    date = fields.Date(default=lambda self: fields.Date.today(),
-                       track_visibility="always",)
-    pay = fields.Float(compute="_compute_pay", store=True)
+        "product.product",
+        required=True,
+        track_visibility="always",
+        string="Sản phẩm",)
+    quantity = fields.Float(
+        track_visibility="always",
+        string="Số lượng",)
+    date = fields.Date(
+        default=lambda self: fields.Date.today(),
+        track_visibility="always",
+        string="Ngày",)
+    pay = fields.Float(
+        compute="_compute_pay",
+        store=True,
+        string="Thành tiền",)
     currency_id = fields.Many2one(
-        'res.currency', default=lambda self: self.env.company.currency_id.id)
-    location_id = fields.Many2one("stock.location", default=8)
+        'res.currency',
+        default=lambda self: self.env.company.currency_id.id)
+    location_id = fields.Many2one(
+        "stock.location", 
+        default=8,)
     worker_id = fields.Many2one(
         "timekeeping.many",
         required=True,
