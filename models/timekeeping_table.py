@@ -37,7 +37,6 @@ class Timekeeping(models.Model):
         default=8,)
     worker_id = fields.Many2one(
         "timekeeping.many",
-        required=True,
         ondelete="cascade",
     )
 

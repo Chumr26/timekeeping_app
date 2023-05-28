@@ -1,115 +1,118 @@
 <odoo>
-  <!-- view for timekeeping.table -->
-  <!-- form view -->
-  <record id="view_form_timekeeping" model="ir.ui.view">
-    <field name="name">Timekeeping Form</field>
-    <field name="model">timekeeping.table</field>
-    <field name="arch" type="xml">
-      <form>
-        <sheet>
-          <group name="group_top">
-            <group name="group_left">
-              <field name="partner_id" />
-              <field name="product_id" />
-            </group>
-            <group name="group_right">
-              <field name="quantity" />
-              <field name="date" />
-            </group>
-          </group>
-        </sheet>
-        <!-- mail mixin fields -->
-        <div class="oe_chatter">
-          <field name="message_follower_ids" widget="mail_followers" />
-          <field name="activity_ids" widget="mail_activity" />
-          <field name="message_ids" widget="mail_thread" />
-          <!-- adding fields to be tracked -->
-          <field name="partner_id" widget="mail_activity" />
-          <field name="product_id" widget="mail_activity" />
-          <field name="quantity" widget="mail_activity" />
-          <field name="date" widget="mail_activity" />
-        </div>
-      </form>
-    </field>
-  </record>
-  <!-- tree view -->
-  <record id="view_tree_timekeeping" model="ir.ui.view">
-    <field name="name">Timekeeping List</field>
-    <field name="model">timekeeping.table</field>
-    <field name="arch" type="xml">
-      <tree>
-        <field name="date" width="120" />
-        <field name="partner_id" width="100" />
-        <field name="product_id" width="150" />
-        <field name="quantity" width="80" />
-        <field name="pay" widget="monetary" width="80"
-          options="{'currency_field': 'currency_id'}"
-          optional="hide" />
-        <!-- must put it here to show the sympol -->
-        <field name="currency_id" invisible="1" />
-      </tree>
-    </field>
-  </record>
-  <!-- view for timekeeping.many -->
-  <!-- tree view -->
-  <record id="view_tree_many" model="ir.ui.view">
-    <field name="name">Many Tree</field>
-    <field name="model">timekeeping.many</field>
-    <field name="arch" type="xml">
-      <tree>
-        <field name="date" />
-        <field name="id" />
-      </tree>
-    </field>
-  </record>
-  <!-- form view -->
-  <record id="view_form_many" model="ir.ui.view">
-    <field name="name">Many Form</field>
-    <field name="model">timekeeping.many</field>
-    <field name="arch" type="xml">
-      <form>
-        <sheet>
-          <group name="group_top">
-            <group name="group_left">
-              <group name="group_left">
-                <field name="date" />
-              </group>
-            </group>
-          </group>
-          <field name="line_ids">
-            <tree editable="bottom">
-              <field name="partner_id" width="100" />
-              <field name="product_id" width="150" />
-              <field name="quantity" width="80" />
-              <field name="pay" widget="monetary"
-                options="{'currency_field': 'currency_id'}"
-                width="80" optional="hide" />
-              <!-- must put it here to show the sympol -->
-              <field name="currency_id" invisible="1" />
-            </tree>
-          </field>
-        </sheet>
-      </form>
-    </field>
-  </record>
-  <!-- search view -->
-  <record id="view_search_timekeeping" model="ir.ui.view">
-    <field name="name">Timekeeping Filters</field>
-    <field name="model">timekeeping.table</field>
-    <field name="arch" type="xml">
-      <search>
-        <field name="partner_id" />
-        <field name="product_id" />
-        <!-- Filters -->
-        <filter string="Today" name="filter_today"
-          domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
-        <!-- GroupBy -->
-        <group expand="1" string="Group By">
-          <filter string="User" name="partner_id" context="{'group_by':'partner_id'}" />
-          <filter string="Product" name="product_id" context="{'group_by':'product_id'}" />
-          <filter string="Date" name="date" context="{'group_by':'date'}" />
-        </group>
-      </search>
-    </field>
-  </record>
+	<!-- view for timekeeping.table -->
+	<!-- form view -->
+	<record id="view_form_timekeeping" model="ir.ui.view">
+		<field name="name">Timekeeping Form</field>
+		<field name="model">timekeeping.table</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group name="group_top">
+						<group name="group_left">
+							<field name="partner_id" />
+							<field name="product_id" />
+						</group>
+						<group name="group_right">
+							<field name="quantity" />
+							<field name="date" />
+						</group>
+					</group>
+				</sheet>
+				<!-- mail mixin fields -->
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="activity_ids" widget="mail_activity" />
+					<field name="message_ids" widget="mail_thread" />
+					<!-- adding fields to be tracked -->
+					<field name="partner_id" widget="mail_activity" />
+					<field name="product_id" widget="mail_activity" />
+					<field name="quantity" widget="mail_activity" />
+					<field name="date" widget="mail_activity" />
+				</div>
+			</form>
+		</field>
+	</record>
+	<!-- tree view -->
+	<record id="view_tree_timekeeping" model="ir.ui.view">
+		<field name="name">Timekeeping List</field>
+		<field name="model">timekeeping.table</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="date" width="120" />
+				<field name="partner_id" width="100" />
+				<field name="product_id" width="150" />
+				<field name="quantity" width="80" />
+				<field name="pay" widget="monetary" width="80"
+					options="{'currency_field': 'currency_id'}"
+					optional="hide" />
+				<!-- must put it here to show the sympol -->
+				<field name="currency_id" invisible="1" />
+			</tree>
+		</field>
+	</record>
+	<!-- view for timekeeping.many -->
+	<!-- tree view -->
+	<record id="view_tree_many" model="ir.ui.view">
+		<field name="name">Many Tree</field>
+		<field name="model">timekeeping.many</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="date" />
+				<field name="id" />
+			</tree>
+		</field>
+	</record>
+	<!-- form view -->
+	<record id="view_form_many" model="ir.ui.view">
+		<field name="name">Many Form</field>
+		<field name="model">timekeeping.many</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group name="group_top">
+						<group name="group_left">
+							<group name="group_left">
+								<field name="date" />
+							</group>
+						</group>
+					</group>
+					<field name="line_ids">
+						<tree editable="bottom">
+							<field name="partner_id" width="100" />
+							<field name="product_id" width="150" />
+							<field name="quantity" width="80" />
+							<field name="pay" widget="monetary"
+								options="{'currency_field': 'currency_id'}"
+								width="80" optional="hide" />
+							<!-- must put it here to show the sympol -->
+							<field name="currency_id" invisible="1" />
+						</tree>
+					</field>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<!-- search view -->
+	<record id="view_search_timekeeping" model="ir.ui.view">
+		<field name="name">Timekeeping Filters</field>
+		<field name="model">timekeeping.table</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="partner_id" />
+				<field name="product_id" />
+				<!-- Filters -->
+				<filter string="Today" name="filter_today"
+					domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<!-- GroupBy -->
+				<group expand="1" string="Group By">
+					<filter string="User" name="partner_id"
+						context="{'group_by':'partner_id'}" />
+					<filter string="Product" name="product_id"
+						context="{'group_by':'product_id'}" />
+					<filter string="Date" name="date"
+						context="{'group_by':'date'}" />
+				</group>
+			</search>
+		</field>
+	</record>
 </odoo>
