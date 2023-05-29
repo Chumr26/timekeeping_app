@@ -39,6 +39,20 @@ class Timekeeping(models.Model):
         "timekeeping.many",
         ondelete="cascade",
     )
+    image_1920 = fields.Image(
+        string = "Ảnh",
+        related='product_id.image_1920'
+    )
+    reason_selection = [
+    ('reason_1', 'Reason 1'),
+    ('reason_2', 'Reason 2'),
+    ('reason_3', 'Reason 3'),
+    ('reason_4', 'Reason 4'), 
+    ]
+    reason = fields.Selection(
+        reason_selection, string='Lí do', 
+        track_visibility="always",
+    )
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):
