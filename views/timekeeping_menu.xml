@@ -3,7 +3,7 @@
     <record id="action_timekeeping_table" model="ir.actions.act_window">
         <field name="name">Timekeeping Table</field>
         <field name="res_model">timekeeping.table</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form</field>hsfkhf
     </record>
     <!-- Timekeeping App Menu -->
     <!-- Menu item to open the Book list -->
