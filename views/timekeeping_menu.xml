@@ -15,8 +15,8 @@
         model="ir.actions.act_window">
         <field name="name">Many</field>
         <field name="res_model">timekeeping.many</field>
-        <field name="view_mode">tree,form</field>
-        <field name="views">view_tree_many,view_form_many</field>
+        <field name="view_mode">form</field>
+        <field name="views">view_form_many</field>
     </record>
     <menuitem id="menu_timekeeping_many"
         name="Many"
