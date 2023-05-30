@@ -59,6 +59,10 @@ class Timekeeping(models.Model):
         reason_selection, string='Lí do',
         track_visibility="always",
     )
+    note = fields.Char(
+        string="Ghi chú", 
+        widget="textarea",
+    )
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):
