@@ -7,50 +7,56 @@ class Timekeeping(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     partner_id = fields.Many2one(
-        "res.partner",
+        "hr.employee",
         delegate=True,
         ondelete="cascade",
         required=True,
         track_visibility="always",
-        string="Nhân viên",)
+        string="Nhân viên",
+    )
     product_id = fields.Many2one(
         "product.product",
         required=True,
         track_visibility="always",
-        string="Sản phẩm",)
+        string="Sản phẩm",
+    )
     quantity = fields.Float(
         track_visibility="always",
-        string="Số lượng",)
+        string="Số lượng",
+    )
     date = fields.Date(
         default=lambda self: fields.Date.today(),
         track_visibility="always",
-        string="Ngày",)
+        string="Ngày",
+    )
     pay = fields.Float(
         compute="_compute_pay",
         store=True,
-        string="Thành tiền",)
+        string="Thành tiền",
+    )
     currency_id = fields.Many2one(
         'res.currency',
         default=lambda self: self.env.company.currency_id.id)
     location_id = fields.Many2one(
-        "stock.location", 
-        default=8,)
+        "stock.location",
+        default=8,
+    )
     worker_id = fields.Many2one(
         "timekeeping.many",
         ondelete="cascade",
     )
     image_1920 = fields.Image(
-        string = "Ảnh",
+        string="Ảnh",
         related='product_id.image_1920'
     )
     reason_selection = [
-    ('reason_1', 'Reason 1'),
-    ('reason_2', 'Reason 2'),
-    ('reason_3', 'Reason 3'),
-    ('reason_4', 'Reason 4'), 
+        ('reason_1', 'Reason 1'),
+        ('reason_2', 'Reason 2'),
+        ('reason_3', 'Reason 3'),
+        ('reason_4', 'Reason 4'),
     ]
     reason = fields.Selection(
-        reason_selection, string='Lí do', 
+        reason_selection, string='Lí do',
         track_visibility="always",
     )
 
