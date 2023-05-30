@@ -7,7 +7,7 @@ class Timekeeping(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     partner_id = fields.Many2one(
-        "hr.employee",
+        "res.partner",
         delegate=True,
         ondelete="cascade",
         required=True,
@@ -33,6 +33,7 @@ class Timekeeping(models.Model):
         compute="_compute_pay",
         store=True,
         string="Thành tiền",
+        groups='timekeeping_app.timekeeping_group_manager'
     )
     currency_id = fields.Many2one(
         'res.currency',
