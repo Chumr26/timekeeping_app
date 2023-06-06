@@ -1,4 +1,5 @@
 from odoo import models, fields, api  # type:ignore
+from odoo.exceptions import ValidationError #type:ignore
 
 
 class Timekeeping(models.Model):
@@ -64,6 +65,13 @@ class Timekeeping(models.Model):
         string="Ghi chú", 
         widget="textarea",
     )
+
+    @api.constrains('partner_id')
+    def _check_partner_company(self):
+        for record in self:
+            if record.partner_id and record.partner_id.company_id != record.company_id:
+                raise ValidationError(
+                    "Selected partner must belong to the selected company.")
 
     @api.depends("product_id.list_price", "quantity")
     def _compute_pay(self):

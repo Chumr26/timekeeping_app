@@ -10,8 +10,7 @@
 					<group name="group_top">
 						<group name="group_left">
 							<field name="company_id" string="Xưởng"
-								options="{'no_create': True}"
-								attrs="{'required': [('partner_id', '!=', False)]}" />
+								options="{'no_create': True}" />
 							<field name="partner_id"
 								domain="[('company_id', '=', company_id)]"
 								options="{'no_create': True}" />
