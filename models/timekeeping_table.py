@@ -15,6 +15,10 @@ class Timekeeping(models.Model):
         track_visibility="always",
         string="Nhân viên",
     )
+    company_id = fields.Many2one(
+        "res.company",
+        string="Xưởng"
+    )
     product_id = fields.Many2one(
         "product.product",
         required=True,
