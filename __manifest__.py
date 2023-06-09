@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Chấm Công",
+    'name': "Báo Công",
 
     'summary': """
         Chấm công nhân công và cập nhật sản lượng""",
@@ -16,7 +16,7 @@
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['product','mail','stock'],
+    'depends': ['product','mail','stock','hr','sale'],
 
     # always loaded
     'data': [

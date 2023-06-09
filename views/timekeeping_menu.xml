@@ -1,14 +1,14 @@
 <odoo>
     <!-- Action to open the Book list -->
     <record id="action_timekeeping_table" model="ir.actions.act_window">
-        <field name="name">Timekeeping Table</field>
+        <field name="name">Bảng Báo Công</field>
         <field name="res_model">timekeeping.table</field>
         <field name="view_mode">tree,form</field>
     </record>
     <!-- Timekeeping App Menu -->
     <!-- Menu item to open the Book list -->
     <menuitem id="menu_timekeeping_table"
-        name="Timekeeping"
+        name="Báo Công"
         action="action_timekeeping_table"
     />
     <record id="action_timekeeping_many"

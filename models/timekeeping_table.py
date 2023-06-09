@@ -1,5 +1,5 @@
 from odoo import models, fields, api  # type:ignore
-from odoo.exceptions import ValidationError #type:ignore
+from odoo.exceptions import ValidationError  # type:ignore
 
 
 class Timekeeping(models.Model):
@@ -7,23 +7,32 @@ class Timekeeping(models.Model):
     _description = "Timekeeping"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
-    partner_id = fields.Many2one(
-        "res.partner",
+    employee_id = fields.Many2one(
+        "hr.employee",
         delegate=True,
         ondelete="cascade",
         required=True,
         track_visibility="always",
         string="Nhân viên",
     )
+
+    partner_id = fields.Many2one(
+        "res.partner",
+        required=True,
+        track_visibility="always",
+        string="Khách hàng",
+    )
+
     company_id = fields.Many2one(
         "res.company",
         string="Xưởng"
     )
     product_id = fields.Many2one(
-        "product.product",
+        "product.template",
         required=True,
         track_visibility="always",
         string="Sản phẩm",
+        # domain="[('order_id', '=', quotation_id)]",
     )
     quantity = fields.Float(
         track_visibility="always",
@@ -53,7 +62,7 @@ class Timekeeping(models.Model):
     )
     image_1920 = fields.Image(
         string="Ảnh",
-        related='product_id.image_1920'
+        related='product_id.image_1920',
     )
     reason_selection = [
         ('reason_1', 'Reason 1'),
@@ -66,8 +75,13 @@ class Timekeeping(models.Model):
         track_visibility="always",
     )
     note = fields.Char(
-        string="Ghi chú", 
+        string="Ghi chú",
         widget="textarea",
+    )
+    quotation_id = fields.Many2one(
+        "sale.order",
+        string="Đơn hàng",
+        domain="[('partner_id', '=', partner_id)]"
     )
 
     @api.constrains('partner_id')
