@@ -18,10 +18,11 @@
 						<group name="group_right">
 							<group name="group_left">
 								<field name="partner_id" />
-								<field name="quotation_id"
+								<field name="order_id"
 								domain="[('partner_id', '=', partner_id)]"/>
-								<field name="product_id"
-									options="{'no_create': True}" />
+								<field name="order_line_id"
+									options="{'no_create': True}" 
+									domain="[('order_id', '=', order_id)]"/>
 								<field name="quantity" />
 							</group>
 							<group name="group_right">
@@ -54,7 +55,7 @@
 			<tree>
 				<field name="date" width="120" />
 				<field name="employee_id" width="100" />
-				<field name="product_id" width="150" />
+				<field name="order_line_id" width="150" />
 				<field name="quantity" width="80" />
 				<field name="pay" widget="monetary" width="80"
 					options="{'currency_field': 'currency_id'}" />
@@ -74,7 +75,7 @@
 						<tree editable="bottom">
 							<field name="date" width="120" />
 							<field name="employee_id" width="100" />
-							<field name="product_id" width="150" />
+							<field name="order_line_id" width="150" />
 							<field name="quantity" width="80" />
 							<field name="pay" widget="monetary"
 								options="{'currency_field': 'currency_id'}"
@@ -94,7 +95,7 @@
 		<field name="arch" type="xml">
 			<search>
 				<field name="employee_id" />
-				<field name="product_id" />
+				<field name="order_line_id" />
 				<!-- Filters -->
 				<filter string="Today" name="filter_today"
 					domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
@@ -102,8 +103,8 @@
 				<group expand="1" string="Group By">
 					<filter string="User" name="employee_id"
 						context="{'group_by':'employee_id'}" />
-					<filter string="Product" name="product_id"
-						context="{'group_by':'product_id'}" />
+					<filter string="Product" name="order_line_id"
+						context="{'group_by':'order_line_id'}" />
 					<filter string="Date" name="date"
 						context="{'group_by':'date'}" />
 				</group>

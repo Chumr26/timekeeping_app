@@ -27,12 +27,11 @@ class Timekeeping(models.Model):
         "res.company",
         string="Xưởng"
     )
-    product_id = fields.Many2one(
-        "product.template",
-        required=True,
+
+    order_line_id = fields.Many2one(
+        "sale.order.line",
         track_visibility="always",
         string="Sản phẩm",
-        # domain="[('order_id', '=', quotation_id)]",
     )
     quantity = fields.Float(
         track_visibility="always",
@@ -62,7 +61,7 @@ class Timekeeping(models.Model):
     )
     image_1920 = fields.Image(
         string="Ảnh",
-        related='product_id.image_1920',
+        related='order_line_id.product_id.image_1920',
     )
     reason_selection = [
         ('reason_1', 'Reason 1'),
@@ -78,30 +77,30 @@ class Timekeeping(models.Model):
         string="Ghi chú",
         widget="textarea",
     )
-    quotation_id = fields.Many2one(
+    order_id = fields.Many2one(
         "sale.order",
         string="Đơn hàng",
         domain="[('partner_id', '=', partner_id)]"
     )
 
-    @api.constrains('partner_id')
+    @api.constrains('employee_id')
     def _check_partner_company(self):
         for record in self:
-            if record.partner_id and record.partner_id.company_id != record.company_id:
+            if record.employee_id and record.employee_id.company_id != record.company_id:
                 raise ValidationError(
                     "Selected partner must belong to the selected company.")
 
-    @api.depends("product_id.list_price", "quantity")
+    @ api.depends("order_line_id.product_id.list_price", "quantity")
     def _compute_pay(self):
         for product in self:
-            product.pay = product.product_id.list_price * product.quantity
+            product.pay = product.order_line_id.product_id.list_price * product.quantity
 
     # update quantity onhand
-    @api.onchange("quantity")
+    @ api.onchange("quantity")
     def _onchange_quantity(self):
         if self.quantity != 0:
             quant = self.env["stock.quant"].search(
-                [("product_id", "=", self.product_id.id)], limit=1)
+                [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
             if self._origin.id and quant:
                 total_quantity = quant.quantity - self._origin.quantity + self.quantity
                 quant.write({"quantity": total_quantity})
@@ -110,7 +109,7 @@ class Timekeeping(models.Model):
                 quant.write({"quantity": total_quantity})
             else:
                 self.env["stock.quant"].create({
-                    "product_id": self.product_id.id,
+                    "product_id": self.order_line_id.product_id.id,
                     "quantity": self.quantity,
                     "location_id": self.location_id.id
                 })
