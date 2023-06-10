@@ -9,29 +9,24 @@
 				<sheet>
 					<group name="group_top">
 						<group name="group_left">
-							<field name="date" />
-							<field name="company_id" options="{'no_create': True}" />
-							<field name="employee_id"
-								domain="[('company_id', '=', company_id)]"
-								options="{'no_create': True}" />
+							<field name="partner_id" />
+							<field name="order_id" domain="[('partner_id', '=', partner_id)]" />
+							<field name="order_line_id" options="{'no_create': True}"
+								domain="[('order_id', '=', order_id)]" />
+							<field name="quantity" />
+							<field name="reason" />
 						</group>
 						<group name="group_right">
 							<group name="group_left">
-								<field name="partner_id" />
-								<field name="order_id"
-								domain="[('partner_id', '=', partner_id)]"/>
-								<field name="order_line_id"
-									options="{'no_create': True}" 
-									domain="[('order_id', '=', order_id)]"/>
-								<field name="quantity" />
+								<field name="date" />
+								<field name="company_id" options="{'no_create': True}" />
+								<field name="employee_id" domain="[('company_id', '=', company_id)]"
+									options="{'no_create': True}" />
 							</group>
 							<group name="group_right">
 								<field name="image_1920" widget="image" />
 							</group>
 						</group>
-					</group>
-					<group>
-						<field name="reason" />
 					</group>
 					<group string="Ghi chú">
 						<field colspan="2" name="note" nolabel="1"
