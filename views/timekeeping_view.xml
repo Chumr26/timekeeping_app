@@ -14,7 +14,6 @@
 							<field name="order_line_id" options="{'no_create': True}"
 								domain="[('order_id', '=', order_id)]" />
 							<field name="quantity" />
-							<field name="reason" />
 						</group>
 						<group name="group_right">
 							<group name="group_left">
@@ -22,6 +21,7 @@
 								<field name="company_id" options="{'no_create': True}" />
 								<field name="employee_id" domain="[('company_id', '=', company_id)]"
 									options="{'no_create': True}" />
+								<field name="reason" />
 							</group>
 							<group name="group_right">
 								<field name="image_1920" widget="image" />
