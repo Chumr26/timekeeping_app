@@ -24,7 +24,7 @@
 		parent="menu_timekeeping_table"
 	/>
 	<record id="hr.menu_hr_employee_user" model="ir.ui.menu">
-		<field name="parent_id">319</field>
+		<field name="parent_id">286</field>
 		<field name="sequence">20</field>
 	</record>
 </odoo>
