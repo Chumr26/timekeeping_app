@@ -1,26 +1,30 @@
 <odoo>
-    <!-- Action to open the Book list -->
-    <record id="action_timekeeping_table" model="ir.actions.act_window">
-        <field name="name">Bảng Báo Công</field>
-        <field name="res_model">timekeeping.table</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <!-- Timekeeping App Menu -->
-    <!-- Menu item to open the Book list -->
-    <menuitem id="menu_timekeeping_table"
-        name="Báo Công"
-        action="action_timekeeping_table"
-    />
-    <record id="action_timekeeping_many"
-        model="ir.actions.act_window">
-        <field name="name">Many</field>
-        <field name="res_model">timekeeping.many</field>
-        <field name="view_mode">form</field>
-        <field name="views">view_form_many</field>
-    </record>
-    <menuitem id="menu_timekeeping_many"
-        name="Many"
-        action="action_timekeeping_many"
-        parent="menu_timekeeping_table"
-    />
+	<!-- Action to open the Book list -->
+	<record id="action_timekeeping_table" model="ir.actions.act_window">
+		<field name="name">Bảng Báo Công</field>
+		<field name="res_model">timekeeping.table</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<!-- Timekeeping App Menu -->
+	<!-- Menu item to open the Book list -->
+	<menuitem id="menu_timekeeping_table"
+		name="Báo Công"
+		action="action_timekeeping_table"
+	/>
+	<record id="action_timekeeping_many"
+		model="ir.actions.act_window">
+		<field name="name">Many</field>
+		<field name="res_model">timekeeping.many</field>
+		<field name="view_mode">form</field>
+		<field name="views">view_form_many</field>
+	</record>
+	<menuitem id="menu_timekeeping_many"
+		name="Many"
+		action="action_timekeeping_many"
+		parent="menu_timekeeping_table"
+	/>
+	<record id="hr.menu_hr_employee_user" model="ir.ui.menu">
+		<field name="parent_id">319</field>
+		<field name="sequence">20</field>
+	</record>
 </odoo>
