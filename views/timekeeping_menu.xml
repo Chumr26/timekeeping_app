@@ -11,6 +11,8 @@
 		name="Báo Công"
 		action="action_timekeeping_table"
 	/>
+
+	
 	<record id="action_timekeeping_many"
 		model="ir.actions.act_window">
 		<field name="name">Many</field>
