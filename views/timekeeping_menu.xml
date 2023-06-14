@@ -25,14 +25,8 @@
 		action="action_timekeeping_many"
 		parent="menu_timekeeping_table"
 	/>
-	<!-- sever -->
 	<record id="hr.menu_hr_employee_user" model="ir.ui.menu">
-		<field name="parent_id">286</field>
-		<field name="sequence">20</field>
+		<field name="parent_id" ref="timekeeping_app.menu_timekeeping_table" />
 	</record>
-	<!-- local -->
-	<!-- <record id="hr.menu_hr_employee_user" model="ir.ui.menu">
-		<field name="parent_id">284</field>
-		<field name="sequence">20</field>
-	</record> -->
+	
 </odoo>
