@@ -16,12 +16,12 @@ class Timekeeping(models.Model):
         string="Nhân viên",
     )
 
-    partner_id = fields.Many2one(
-        "res.partner",
-        required=True,
-        track_visibility="always",
-        string="Khách hàng",
-    )
+    # partner_id = fields.Many2one(
+    #     "res.partner",
+    #     # required=True,
+    #     track_visibility="always",
+    #     string="Khách hàng",
+    # )
 
     company_id = fields.Many2one(
         "res.company",
@@ -80,7 +80,7 @@ class Timekeeping(models.Model):
     order_id = fields.Many2one(
         "sale.order",
         string="Đơn hàng",
-        domain="[('partner_id', '=', partner_id)]"
+        # domain="[('partner_id', '=', partner_id)]"
     )
 
     @api.constrains('employee_id')

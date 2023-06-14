@@ -10,3 +10,6 @@ class Many(models.Model):
         "worker_id",
         ondelete="cascade",
     )
+    date = fields.Date(related='line_ids.date',default=lambda self: fields.Date.today(),
+        track_visibility="always",
+        string="Ngày",)
