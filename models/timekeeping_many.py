@@ -1,4 +1,5 @@
-from odoo import fields, models#type:ignore
+from xml.dom import ValidationErr
+from odoo import fields, models,api#type:ignore
 
 
 class Many(models.Model):
@@ -13,3 +14,7 @@ class Many(models.Model):
     date = fields.Date(related='line_ids.date',default=lambda self: fields.Date.today(),
         track_visibility="always",
         string="Ngày",)
+    
+    company_id = fields.Many2one(related='line_ids.company_id',string="Xưởng", readonly = False )
+    
+   

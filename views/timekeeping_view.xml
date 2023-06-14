@@ -68,14 +68,14 @@
 				<sheet>
 					<group>
 						<field name="date" width="120" />
+						<field name="company_id" width="80" />
+						
 					</group>
 					<field name="line_ids">
 						<tree editable="bottom">
-							<field name="employee_id" width="100" />
-							<!-- <field name="partner_id" invisible="1"/> -->
+							<field name="employee_id" width="100" domain="[('company_id', '=', parent.company_id)]" />
 							<field name="order_id" width="80" />
 							<field name="order_line_id" width="80" ptions="{'no_create': True}" domain="[('order_id', '=', order_id)]"/>
-							<field name="company_id" width="80" />
 							<field name="quantity" width="80" />
 						</tree>
 					</field>

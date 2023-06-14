@@ -16,19 +16,20 @@ class Timekeeping(models.Model):
         string="Nhân viên",
     )
 
-    # partner_id = fields.Many2one(
-    #     "res.partner",
-    #     # required=True,
-    #     track_visibility="always",
-    #     string="Khách hàng",
-    # )
+    partner_id = fields.Many2one(
+        "res.partner",
+        # required=True,
+        track_visibility="always",
+        string="Khách hàng",
+    )
 
     company_id = fields.Many2one(
         "res.company",
         string="Xưởng"
     )
     # product_id = fields.Many2one('product.template', string='Product')
-    list_price = fields.Float(string='Đơn giá', related='order_line_id.product_id.list_price', readonly=True,groups='timekeeping_app.timekeeping_group_manager')
+    list_price = fields.Float(string='Đơn giá', related='order_line_id.product_id.list_price',
+                              readonly=True, groups='timekeeping_app.timekeeping_group_manager')
     order_line_id = fields.Many2one(
         "sale.order.line",
         track_visibility="always",
@@ -84,12 +85,12 @@ class Timekeeping(models.Model):
         # domain="[('partner_id', '=', partner_id)]"
     )
 
-    @api.constrains('employee_id')
+    @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
-        for record in self:
-            if record.employee_id and record.employee_id.company_id != record.company_id:
-                raise ValidationError(
-                    "Selected partner must belong to the selected company.")
+     for record in self:
+        if record.employee_id and record.partner_id and record.employee_id.company_id != record.partner_id.company_id:
+            raise ValidationError("Selected partner must belong to the selected company.")
+
 
     @ api.depends("order_line_id.product_id.list_price", "quantity")
     def _compute_pay(self):
