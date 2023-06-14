@@ -27,7 +27,8 @@ class Timekeeping(models.Model):
         "res.company",
         string="Xưởng"
     )
-
+    # product_id = fields.Many2one('product.template', string='Product')
+    list_price = fields.Float(string='Price', related='order_line_id.product_id.list_price', readonly=True)
     order_line_id = fields.Many2one(
         "sale.order.line",
         track_visibility="always",
