@@ -10,7 +10,7 @@
 					<group name="group_top">
 						<group name="group_left">
 							<!-- <field name="partner_id" invisible="1"/> -->
-							<field name="order_id" />
+							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]"/>
 							<field name="order_line_id" options="{'no_create': True}" domain="[('order_id', '=', order_id)]" />
 							<field name="quantity" />
 							<field name="reason" />
@@ -47,11 +47,11 @@
 		<field name="arch" type="xml">
 			<tree>
 				<field name="date" width="80" />
-				<field name="employee_id" width="80" options="{'no_create': True}" />
-				<field name="order_line_id" width="80" options="{'no_create': True}" />
+				<field name="employee_id" width="80" />
+				<field name="order_line_id" width="80" />
 				<field name="quantity" width="80" />
 				<field name="list_price" width="80" />
-				<field name="order_id" width="80" options="{'no_create': True}" domain="[('state', '=', 'sale')]"  />
+				<field name="order_id" width="80"   />
 				<field name="company_id" width="80"/>
 				<field name="pay" widget="monetary" width="80" options="{'currency_field': 'currency_id'}" />
 				<!-- must put it here to show the sympol -->
