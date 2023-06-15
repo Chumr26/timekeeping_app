@@ -1,27 +1,27 @@
 <odoo>
 	<!-- Action to open the Book list -->
 	<record id="action_timekeeping_table" model="ir.actions.act_window">
-		<field name="name">Statictis Production In Day</field>
+		<field name="name">Bảng sản lượng</field>
 		<field name="res_model">timekeeping.table</field>
 		<field name="view_mode">tree,form</field>
 	</record>
 	<!-- Timekeeping App Menu -->
 	<!-- Menu item to open the Book list -->
 	<menuitem id="menu_timekeeping_table"
-		name="Production"
+		name="Sản lượng"
 		action="action_timekeeping_table"
 	/>
 
 
 	<record id="action_timekeeping_many"
 		model="ir.actions.act_window">
-		<field name="name">Many</field>
+		<field name="name">Sản lượng trong ngày</field>
 		<field name="res_model">timekeeping.many</field>
 		<field name="view_mode">form</field>
 		<field name="views">view_form_many</field>
 	</record>
 	<menuitem id="menu_timekeeping_many"
-		name="Production in day"
+		name="Bảng sản lượng"
 		action="action_timekeeping_many"
 		parent="menu_timekeeping_table"
 	/>

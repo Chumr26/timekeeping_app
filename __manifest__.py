@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Báo Công",
+    'name': "Sản lượng",
 
     'summary': """
         Chấm công nhân công và cập nhật sản lượng""",
