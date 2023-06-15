@@ -15,6 +15,6 @@ class Many(models.Model):
         track_visibility="always",
         string="Ngày",)
     
-    company_id = fields.Many2one(related='line_ids.company_id',string="Xưởng", readonly = False )
+    company_id = fields.Many2one(related='line_ids.company_id',string="Xưởng", readonly = False, required=True )
     
-   
+  

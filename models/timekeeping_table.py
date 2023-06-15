@@ -87,10 +87,18 @@ class Timekeeping(models.Model):
 
     @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
-     for record in self:
-        if record.employee_id and record.partner_id and record.employee_id.company_id != record.partner_id.company_id:
-            raise ValidationError("Selected partner must belong to the selected company.")
+        for record in self:
+            if record.employee_id and record.partner_id:
+                if record.employee_id.company_id != record.partner_id.company_id:
+                    raise ValidationError("Selected partner must belong to the selected company.")
+            elif record.employee_id and not record.partner_id:
+                if record.employee_id.company_id != record.company_id:
+                    raise ValidationError("Selected employee must belong to the selected company.")
 
+    @api.onchange('employee_id')
+    def onchange_employee_id(self): 
+        if self.employee_id:
+            self.company_id = self.employee_id.company_id.id       
 
     @ api.depends("order_line_id.product_id.list_price", "quantity")
     def _compute_pay(self):
