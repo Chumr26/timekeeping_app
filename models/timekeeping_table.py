@@ -35,7 +35,7 @@ class Timekeeping(models.Model):
         track_visibility="always",
         string="Sản phẩm",
     )
-    quantity = fields.Float(
+    quantity = fields.Integer(
         track_visibility="always",
         string="Số lượng",
     )
@@ -85,6 +85,11 @@ class Timekeeping(models.Model):
         # domain="[('partner_id', '=', partner_id)]"
     )
 
+    @api.constrains('quantity')
+    def _check_quantity(self):
+        if self.quantity < 0 :
+            raise ValidationError("Not allow positive number!")
+                
     @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
         for record in self:
