@@ -11,10 +11,17 @@ class Many(models.Model):
         "worker_id",
         ondelete="cascade",
     )
-    date = fields.Date(related='line_ids.date',default=lambda self: fields.Date.today(),
+    date = fields.Date(
+        related='line_ids.date',
+        default=lambda self: fields.Date.today(),
         track_visibility="always",
         string="Ngày",)
     
-    company_id = fields.Many2one(related='line_ids.company_id',string="Xưởng", readonly = False, required=True )
+    company_id = fields.Many2one(
+        related='line_ids.company_id',
+        string="Xưởng", 
+        readonly = False, 
+        required=True 
+        )
     
   
