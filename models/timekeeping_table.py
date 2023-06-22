@@ -25,6 +25,7 @@ class Timekeeping(models.Model):
 
     company_id = fields.Many2one(
         "res.company",
+        required=True,
         string="Xưởng"
     )
     # product_id = fields.Many2one('product.template', string='Product')
