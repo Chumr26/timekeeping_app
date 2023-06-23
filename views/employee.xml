@@ -1,0 +1,60 @@
+<odoo>
+	<data>
+		<record id="view_employee_form_1" model="ir.ui.view">
+			<field name="name">employee Form</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//form/header/button[@groups='hr.group_hr_user']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//form/sheet/notebook" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//form/sheet/group/group/field[@name='work_email']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='parent_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//field[@name='coach_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='category_ids']" position="attributes">
+					<attribute name="invisible">1</attribute>
+
+				</xpath>
+				<xpath expr="//field[@name='department_id']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//form/sheet/group/group/field[@name='company_id']" position="after">
+					<field name="department_id" />
+				</xpath>
+				<xpath expr='//form/sheet/div/field[@name="image_1920"]' position="before">
+					<style>
+						.oe_avatar1 {
+						float: right;
+						margin-bottom: 10px;
+						}
+
+						.oe_avatar1 img {
+						width: 180px !important;
+						height: auto;
+						object-fit: fill;
+						vertical-align: top;
+						border: 1px solid #dee2e6;
+						}
+					</style>
+				</xpath>
+				<xpath expr='//form/sheet/div/field[@name="image_1920"]' position="attributes">
+					<attribute name="class">oe_avatar1</attribute>
+					<attribute name="options" />
+				</xpath>
+				<field name="job_title" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>
