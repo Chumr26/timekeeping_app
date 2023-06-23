@@ -9,6 +9,7 @@ class Many(models.Model):
     line_ids = fields.One2many(
         "timekeeping.table",
         "worker_id",
+        required=True,
         ondelete="cascade",
     )
     date = fields.Date(

@@ -25,7 +25,10 @@ class Timekeeping(models.Model):
 
     company_id = fields.Many2one(
         "res.company",
-        string="Xưởng"
+        required=True,
+        track_visibility="always",
+        readonly=True,
+        string="Xưởng",
     )
     # product_id = fields.Many2one('product.template', string='Product')
     list_price = fields.Float(string='Đơn giá', related='order_line_id.product_id.list_price',
@@ -87,28 +90,30 @@ class Timekeeping(models.Model):
 
     @api.constrains('quantity')
     def _check_quantity(self):
-        if self.quantity < 0 :
+        if self.quantity < 0:
             raise ValidationError("Not allow positive number!")
-        
+
     @api.constrains('date')
     def _check_date(self):
-        if self.date < self.order_id.date_order.date() :
+        if self.date < self.order_id.date_order.date():
             raise ValidationError("Invalid date!")
-                
+
     @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
         for record in self:
             if record.employee_id and record.partner_id:
                 if record.employee_id.company_id != record.partner_id.company_id:
-                    raise ValidationError("Selected partner must belong to the selected company.")
+                    raise ValidationError(
+                        "Selected partner must belong to the selected company.")
             elif record.employee_id and not record.partner_id:
                 if record.employee_id.company_id != record.company_id:
-                    raise ValidationError("Selected employee must belong to the selected company.")
+                    raise ValidationError(
+                        "Selected employee must belong to the selected company.")
 
     @api.onchange('employee_id')
-    def onchange_employee_id(self): 
+    def onchange_employee_id(self):
         if self.employee_id:
-            self.company_id = self.employee_id.company_id.id       
+            self.company_id = self.employee_id.company_id.id
 
     @ api.depends("order_line_id.product_id.list_price", "quantity")
     def _compute_pay(self):
