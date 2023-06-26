@@ -26,8 +26,6 @@ class Timekeeping(models.Model):
     company_id = fields.Many2one(
         "res.company",
         required=True,
-        track_visibility="always",
-        readonly=True,
         string="Xưởng",
     )
     # product_id = fields.Many2one('product.template', string='Product')
@@ -87,16 +85,16 @@ class Timekeeping(models.Model):
         string="Đơn hàng",
         # domain="[('partner_id', '=', partner_id)]"
     )
+    # @api.constrains('date')
+    # def _check_date(self):
+    #     if self.order_id and self.date < self.order_id.date_order.date():
+    #         raise ValidationError("Invalid date!")
 
     @api.constrains('quantity')
     def _check_quantity(self):
-        if self.quantity < 0:
-            raise ValidationError("Not allow positive number!")
-
-    @api.constrains('date')
-    def _check_date(self):
-        if self.date < self.order_id.date_order.date():
-            raise ValidationError("Invalid date!")
+        for record in self:
+            if record.quantity < 0:
+                raise ValidationError("Not allow positive number!")
 
     @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
