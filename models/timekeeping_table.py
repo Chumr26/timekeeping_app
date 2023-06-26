@@ -89,6 +89,11 @@ class Timekeeping(models.Model):
     def _check_quantity(self):
         if self.quantity < 0 :
             raise ValidationError("Not allow positive number!")
+        
+    @api.constrains('date')
+    def _check_date(self):
+        if self.date < self.order_id.date_order.date() :
+            raise ValidationError("Invalid date!")
                 
     @api.constrains('employee_id', 'company_id', 'partner_id')
     def _check_partner_company(self):
