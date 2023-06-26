@@ -85,10 +85,11 @@ class Timekeeping(models.Model):
         string="Đơn hàng",
         # domain="[('partner_id', '=', partner_id)]"
     )
-    # @api.constrains('date')
-    # def _check_date(self):
-    #     if self.order_id and self.date < self.order_id.date_order.date():
-    #         raise ValidationError("Invalid date!")
+    @api.constrains('date')
+    def _check_date(self):
+        for rec in self:
+            if rec.order_id and rec.date < rec.order_id.date_order.date():
+                raise ValidationError("Invalid date!")
 
     @api.constrains('quantity')
     def _check_quantity(self):
