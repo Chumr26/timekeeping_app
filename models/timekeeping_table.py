@@ -137,3 +137,17 @@ class Timekeeping(models.Model):
                     "quantity": self.quantity,
                     "location_id": self.location_id.id
                 })
+
+    @api.onchange('order_id')
+    def _onchange_order_id(self):
+        # Clear the values of dependent fields
+        self.order_line_id = False
+        self.quantity = False
+        self.reason = False
+        self.image_1920 = False
+        self.note = False
+
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        # Clear the values of dependent fields
+        self.employee_id = False
