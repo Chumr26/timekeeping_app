@@ -16,7 +16,7 @@
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['product', 'mail', 'stock', 'hr', 'sale', 'newsale'],
+    'depends': ['product', 'mail', 'stock', 'hr', 'sale'],
 
     # always loaded
     'data': [
