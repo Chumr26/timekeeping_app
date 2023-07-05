@@ -33,7 +33,7 @@
 		parent="menu_timekeeping_table"
 	/>
 	<record id="hr.menu_hr_employee_user" model="ir.ui.menu">
-		<field name="parent_id" ref="timekeeping_app.menu_timekeeping_table" />
+		<field name="parent_id" ref="hr.menu_hr_root" />
 	</record>
 
 </odoo>
