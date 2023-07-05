@@ -10,16 +10,20 @@
 					<group name="group_top">
 						<group name="group_left">
 							<!-- <field name="partner_id" invisible="1"/> -->
-							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]" required="True" />
-							<field name="order_line_id" options="{'no_create': True}" domain="[('order_id', '=', order_id)]" required="True" />
+							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]"
+								required="True" />
+							<field name="order_line_id" options="{'no_create': True}"
+								domain="[('order_id', '=', order_id)]" required="True" />
 							<field name="quantity" />
 							<field name="reason" />
 						</group>
 						<group name="group_right">
 							<group name="group_left">
-								<field name="date"/>
-								<field name="company_id" options="{'no_create': True}" />
-								<field name="employee_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True}" />
+								<field name="date" />
+								<field name="company_id" options="{'no_create': True}"
+									domain="[('parent_id', '!=', False)]" />
+								<field name="employee_id" domain="[('company_id', '=', company_id)]"
+									options="{'no_create': True}" />
 							</group>
 							<group name="group_right">
 								<field name="image_1920" widget="image" />
@@ -27,7 +31,8 @@
 						</group>
 					</group>
 					<group string="Ghi chú">
-						<field colspan="2" name="note" nolabel="1" placeholder="This note is only for internal purposes." />
+						<field colspan="2" name="note" nolabel="1"
+							placeholder="This note is only for internal purposes." />
 					</group>
 				</sheet>
 				<!-- mail mixin fields -->
@@ -67,13 +72,19 @@
 				<sheet>
 					<group>
 						<field name="date" width="120" />
-						<field name="company_id" width="80" attrs="{'readonly': ['|',('company_id', '!=', False) , ('id', '!=', False),]}" options="{'no_create': True}"  widget="selection" />
+						<field name="company_id" width="80"
+							attrs="{'readonly': ['|',('company_id', '!=', False) , ('id', '!=', False),]}"
+							options="{'no_create': True}" widget="selection" />
 						<field name="line_ids">
 							<tree editable="bottom">
 								<field name="company_id" width="80" invisible="1" />
-								<field name="employee_id" width="100" required="True" options="{'no_create': True}" domain="[('company_id', '=', parent.company_id)]" context="{'default_company_id': company_id}" />
-								<field name="order_id" required="True" width="80" options="{'no_create': True}" domain="[('state', '=', 'sale')]" />
-								<field name="order_line_id" required="True" width="80" options="{'no_create': True}" domain="[('order_id', '=', order_id)]" />
+								<field name="employee_id" width="100" required="True" options="{'no_create': True}"
+									domain="[('company_id', '=', parent.company_id)]"
+									context="{'default_company_id': company_id}" />
+								<field name="order_id" required="True" width="80" options="{'no_create': True}"
+									domain="[('state', '=', 'sale')]" />
+								<field name="order_line_id" required="True" width="80" options="{'no_create': True}"
+									domain="[('order_id', '=', order_id)]" />
 								<field name="quantity" width="80" />
 							</tree>
 						</field>
@@ -91,7 +102,8 @@
 				<field name="employee_id" />
 				<field name="order_line_id" />
 				<!-- Filters -->
-				<filter string="Today" name="filter_today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<filter string="Today" name="filter_today"
+					domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
 				<!-- GroupBy -->
 				<group expand="1" string="Group By">
 					<filter string="User" name="employee_id" context="{'group_by':'employee_id'}" />
