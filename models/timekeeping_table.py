@@ -67,10 +67,10 @@ class Timekeeping(models.Model):
         related='order_line_id.product_id.image_1920',
     )
     reason_selection = [
-        ('reason_1', 'Lý do 1'),
-        ('reason_2', 'Lý do 2'),
-        ('reason_3', 'Lý do 3'),
-        ('reason_4', 'Lý do 4'),
+        ('reason_1', 'Reason 1'),
+        ('reason_2', 'Reason 2'),
+        ('reason_3', 'Reason 3'),
+        ('reason_4', 'Reason 4'),
     ]
     reason = fields.Selection(
         reason_selection, string='Lí do',
@@ -85,11 +85,10 @@ class Timekeeping(models.Model):
         string="Đơn hàng",
         # domain="[('partner_id', '=', partner_id)]"
     )
-    @api.constrains('date')
-    def _check_date(self):
-        for rec in self:
-            if rec.order_id and rec.date < rec.order_id.date_order.date():
-                raise ValidationError("Invalid date!")
+    # @api.constrains('date')
+    # def _check_date(self):
+    #     if self.order_id and self.date < self.order_id.date_order.date():
+    #         raise ValidationError("Invalid date!")
 
     @api.constrains('quantity')
     def _check_quantity(self):
@@ -137,17 +136,3 @@ class Timekeeping(models.Model):
                     "quantity": self.quantity,
                     "location_id": self.location_id.id
                 })
-
-    @api.onchange('order_id')
-    def _onchange_order_id(self):
-        # Clear the values of dependent fields
-        self.order_line_id = False
-        self.quantity = False
-        self.reason = False
-        self.image_1920 = False
-        self.note = False
-
-    @api.onchange('company_id')
-    def _onchange_company_id(self):
-        # Clear the values of dependent fields
-        self.employee_id = False
