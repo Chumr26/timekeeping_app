@@ -147,7 +147,7 @@ class Timekeeping(models.Model):
         self.image_1920 = False
         self.note = False
 
-    @api.onchange('company_id')
-    def _onchange_company_id(self):
-        # Clear the values of dependent fields
-        self.employee_id = False
+    # @api.onchange('company_id')
+    # def _onchange_company_id(self):
+    #     # Clear the values of dependent fields
+    #     self.employee_id = False

@@ -1,5 +1,5 @@
 from xml.dom import ValidationErr
-from odoo import fields, models,api#type:ignore
+from odoo import fields, models, api  # type:ignore
 
 
 class Many(models.Model):
@@ -11,18 +11,20 @@ class Many(models.Model):
         "worker_id",
         required=True,
         ondelete="cascade",
+        
     )
     date = fields.Date(
         related='line_ids.date',
         default=lambda self: fields.Date.today(),
         track_visibility="always",
-        string="Ngày",)
-    
-    company_id = fields.Many2one(
-        related='line_ids.company_id',
-        string="Xưởng", 
-        readonly = False, 
-        required=True 
+        string="Ngày",
+        
         )
-    
-  
+
+    company_id = fields.Many2one(
+        # 'res.company',
+        related='line_ids.company_id',
+        readonly=False,
+        required=True,
+        
+    )
