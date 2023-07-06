@@ -1,0 +1,49 @@
+#. module: stock
+#. odoo-javascript
+#: code:addons/stock/static/src/stock_forecasted/forecasted_details.xml:0
+#: model:ir.model.fields,field_description:stock.field_stock_move__product_id
+#, python-format
+msgid "Product"
+msgstr "Mã hàng"
+
+#. module: stock
+#: model:ir.model.fields,field_description:stock.field_stock_move__product_uom_qty
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_move_tree
+msgid "Demand"
+msgstr "Cần xuất"
+
+#. module: stock
+#: model:ir.model.fields,field_description:stock.field_stock_move_line__reserved_uom_qty
+#: model:ir.model.fields.selection,name:stock.selection__stock_package_level__state__assigned
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_move_tree
+msgid "Reserved"
+msgstr "Dự trữ"
+
+#. module: stock
+#: model:ir.model.fields,field_description:stock.field_stock_move_line__qty_done
+#: model:ir.model.fields,field_description:stock.field_stock_package_level__is_done
+#: model:ir.model.fields.selection,name:stock.selection__stock_move__state__done
+#: model:ir.model.fields.selection,name:stock.selection__stock_package_level__state__done
+#: model:ir.model.fields.selection,name:stock.selection__stock_picking__state__done
+#: model:ir.model.fields.selection,name:stock.selection__stock_scrap__state__done
+#: model_terms:ir.ui.view,arch_db:stock.stock_move_line_view_search
+#: model_terms:ir.ui.view,arch_db:stock.stock_scrap_form_view2
+#: model_terms:ir.ui.view,arch_db:stock.view_move_search
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_internal_search
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_move_tree
+msgid "Done"
+msgstr "Xuất hàng"
+
+#. module: stock
+#: model:ir.actions.act_window,name:stock.action_get_picking_type_operations
+#: model:ir.model.fields,field_description:stock.field_stock_picking__move_line_ids
+#: model:ir.ui.menu,name:stock.menu_stock_warehouse_mgmt
+#: model_terms:ir.ui.view,arch_db:stock.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:stock.stock_picking_type_kanban
+#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock.view_template_property_form
+msgid "Operations"
+msgstr "Danh sách mã hàng"

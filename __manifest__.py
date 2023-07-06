@@ -25,5 +25,6 @@
         'views/timekeeping_menu.xml',
         'views/timekeeping_view.xml',
         'views/employee.xml',
+        'views/stock_edit.xml',
     ],
 }
