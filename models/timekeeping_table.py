@@ -66,15 +66,9 @@ class Timekeeping(models.Model):
         string="Ảnh",
         related='order_line_id.product_id.image_1920',
     )
-    reason_selection = [
-        ('reason_1', 'Lý do 1'),
-        ('reason_2', 'Lý do 2'),
-        ('reason_3', 'Lý do 3'),
-        ('reason_4', 'Lý do 4'),
-    ]
-    reason = fields.Selection(
-        reason_selection, string='Lí do',
-        track_visibility="always",
+    reason = fields.Many2one(
+        "timekeeping.reason",
+        required=True,
     )
     note = fields.Char(
         string="Ghi chú",

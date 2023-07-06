@@ -35,5 +35,22 @@
 	<record id="hr.menu_hr_employee_user" model="ir.ui.menu">
 		<field name="parent_id" ref="hr.menu_hr_root" />
 	</record>
-
+	<!-- menu setting -->
+	<menuitem id="menu_timekeeping_setting"
+		name="Cài đặt"
+		parent="menu_timekeeping_table"
+	/>
+	<!-- action and menu for reason -->
+	<record
+		id="action_timekeeping_reason"
+		model="ir.actions.act_window">
+		<field name="name">Lý do</field>
+		<field name="res_model">timekeeping.reason</field>
+		<field name="view_mode">list</field>
+	</record>
+	<menuitem id="menu_timekeeping_reason"
+		name="Lý do"
+		action="action_timekeeping_reason"
+		parent="menu_timekeeping_setting"
+	/>
 </odoo>

@@ -3,3 +3,5 @@ access_timekeeping_user,Timekeeping User,model_timekeeping_table,timekeeping_gro
 access_timekeeping_manager,Timekeeping Manager,model_timekeeping_table,timekeeping_group_manager,1,1,1,1
 access_timekeeping_many_user,Timekeeping Many User,model_timekeeping_many,timekeeping_group_user,1,0,0,0
 access_timekeeping_many_manager,Timekeeping Many Manager,model_timekeeping_many,timekeeping_group_manager,1,1,1,1
+access_timekeeping_reason_user,Timekeeping Reason User,model_timekeeping_reason,timekeeping_group_user,1,0,0,0
+access_timekeeping_reason_manager,Timekeeping Reason Manager,model_timekeeping_reason,timekeeping_group_manager,1,1,1,1
