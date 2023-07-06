@@ -68,7 +68,6 @@ class Timekeeping(models.Model):
     )
     reason = fields.Many2one(
         "timekeeping.reason",
-        required=True,
     )
     note = fields.Char(
         string="Ghi chú",
