@@ -10,20 +10,16 @@
 					<group name="group_top">
 						<group name="group_left">
 							<!-- <field name="partner_id" invisible="1"/> -->
-							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]"
-								required="True" />
-							<field name="order_line_id" options="{'no_create': True}"
-								domain="[('order_id', '=', order_id)]" required="True" />
+							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]" required="True" />
+							<field name="order_line_id" options="{'no_create': True}" domain="[('order_id', '=', order_id)]" required="True" />
 							<field name="quantity" />
 							<field name="reason" options="{'no_create': True}" />
 						</group>
 						<group name="group_right">
 							<group name="group_left">
 								<field name="date" />
-								<field name="company_id" options="{'no_create': True}"
-									domain="[('parent_id', '!=', False)]" />
-								<field name="employee_id" domain="[('company_id', '=', company_id)]"
-									options="{'no_create': True}" />
+								<field name="company_id" options="{'no_create': True}" domain="[('parent_id', '!=', False)]" />
+								<field name="employee_id" domain="[('company_id', '=', company_id)]" options="{'no_create': True}" />
 							</group>
 							<group name="group_right">
 								<field name="image_1920" widget="image" />
@@ -31,8 +27,7 @@
 						</group>
 					</group>
 					<group string="Ghi chú">
-						<field colspan="2" name="note" nolabel="1"
-							placeholder="This note is only for internal purposes." />
+						<field colspan="2" name="note" nolabel="1" placeholder="This note is only for internal purposes." />
 					</group>
 				</sheet>
 				<!-- mail mixin fields -->
@@ -75,14 +70,10 @@
 						<field name="company_id" readonly="False"/>
 						<field name="line_ids">
 							<tree editable="bottom">
-								<field name="employee_id" width="100" required="True" options="{'no_create': True}"
-									domain="[('company_id', '=', parent.company_id)]"
-									context="{'default_company_id': company_id}" />
+								<field name="employee_id" width="100" required="True" options="{'no_create': True}" domain="[('company_id', '=', parent.company_id)]" context="{'default_company_id': company_id}" />
 								<field name="company_id" width="120" />
-								<field name="order_id" required="True" width="80" options="{'no_create': True}"
-									domain="[('state', '=', 'sale')]" />
-								<field name="order_line_id" required="True" width="80" options="{'no_create': True}"
-									domain="[('order_id', '=', order_id)]" />
+								<field name="order_id" required="True" width="80" options="{'no_create': True}" domain="[('state', '=', 'sale')]" />
+								<field name="order_line_id" required="True" width="80" options="{'no_create': True}" domain="[('order_id', '=', order_id)]" />
 								<field name="quantity" width="40" />
 							</tree>
 						</field>
@@ -97,7 +88,7 @@
 		<field name="model">timekeeping.reason</field>
 		<field name="arch" type="xml">
 			<tree editable="bottom">
-				<field name="reason" string="Lý do"/> 
+				<field name="reason" string="Lý do"/>
 			</tree>
 		</field>
 	</record>
@@ -109,13 +100,16 @@
 			<search>
 				<field name="employee_id" />
 				<field name="order_line_id" />
+				<field name="company_id" />
 				<!-- Filters -->
-				<filter string="Today" name="filter_today"
-					domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<filter string="Today" name="filter_today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<filter name="Day" string="ngày" date="create_date" />
+				<!-- <filter string="Xưởng" name="company_id" domain="[('company_id', '=', company_id)]" />
+				<filter string="Nhân viên" name="employee_id" domain="[('employee_id', '=', employee_id)]" /> -->
 				<!-- GroupBy -->
 				<group expand="1" string="Group By">
 					<filter string="User" name="employee_id" context="{'group_by':'employee_id'}" />
-					<filter string="Product" name="order_line_id" context="{'group_by':'order_line_id'}" />
+					<filter string="Xưởng" name="company_id" context="{'group_by':'company_id'}" />
 					<filter string="Date" name="date" context="{'group_by':'date'}" />
 				</group>
 			</search>
