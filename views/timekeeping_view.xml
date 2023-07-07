@@ -110,6 +110,9 @@
 				<group expand="1" string="Group By">
 					<filter string="User" name="employee_id" context="{'group_by':'employee_id'}" />
 					<filter string="Xưởng" name="company_id" context="{'group_by':'company_id'}" />
+					<filter string="Mã Hàng" name="order_line_id" context="{'group_by':'order_line_id'}" />
+					<filter string="Đơn Hàng" name="order_id" context="{'group_by':'order_id'}" />
+
 					<filter string="Date" name="date" context="{'group_by':'date'}" />
 				</group>
 			</search>
