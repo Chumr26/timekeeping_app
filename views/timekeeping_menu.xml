@@ -22,13 +22,13 @@
 	<record
 		id="action_timekeeping_many"
 		model="ir.actions.act_window">
-		<field name="name">Sản lượng trong ngày</field>
+		<field name="name">Ghi nhanh</field>
 		<field name="res_model">timekeeping.many</field>
 		<field name="view_mode">form</field>
 		<field name="views">view_form_many</field>
 	</record>
 	<menuitem id="menu_timekeeping_many"
-		name="Bảng sản lượng"
+		name="Ghi nhanh"
 		action="action_timekeeping_many"
 		parent="menu_timekeeping_table"
 	/>

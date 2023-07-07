@@ -13,8 +13,7 @@ class Many(models.Model):
 
     )
     date = fields.Date(
-        related='line_ids.date',
-        # default=lambda self: fields.Date.today(),
+        default=lambda self: fields.Date.today(),
         string="Ngày",
 
     )
