@@ -28,7 +28,7 @@
 		<field name="views">view_form_many</field>
 	</record>
 	<menuitem id="menu_timekeeping_many"
-		name="Bảng sản lượng"
+		name="Ghi nhanh"
 		action="action_timekeeping_many"
 		parent="menu_timekeeping_table"
 	/>
