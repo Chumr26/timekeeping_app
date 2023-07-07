@@ -8,6 +8,14 @@
       <field name="implied_ids"
         eval="[(4, ref('base.group_user'))]" />
     </record>
+    <!-- Timekeeping Super User Group -->
+    <record id="timekeeping_group_super_user" model="res.groups">
+      <field name="name">Super User</field>
+      <field name="category_id"
+        ref="base.module_category_services_timekeeping" />
+      <field name="implied_ids"
+        eval="[(4, ref('base.group_user'))]" />
+    </record>
     <!-- Timekeeping Manager Group -->
     <record id="timekeeping_group_manager" model="res.groups">
       <field name="name">Manager</field>

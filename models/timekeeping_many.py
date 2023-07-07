@@ -19,6 +19,12 @@ class Many(models.Model):
     )
 
     company_id = fields.Many2one(
-        related='line_ids.company_id',
+        "res.company",
         required=True,
+        string="Xưởng",
     )
+
+    # company_id = fields.Many2one(
+    #     related='line_ids.company_id',
+    #     required=True,
+    # )
