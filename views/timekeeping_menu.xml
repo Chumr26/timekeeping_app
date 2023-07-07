@@ -10,16 +10,14 @@
 	<menuitem id="menu_timekeeping_table"
 		name="Sản lượng"
 		action="action_timekeeping_table"
-		groups="base.group_user"
 	/>
-	<!-- <record
-		id="menu_timekeeping_table" model="ir.ui.menu">
+	<record	id="menu_timekeeping_table" model="ir.ui.menu">
 		<field name="groups_id" eval="[(6, 0, 
 		[ref('timekeeping_app.timekeeping_group_user'),
 		ref('timekeeping_app.timekeeping_group_manager'),
 		ref('timekeeping_app.timekeeping_group_super_user')]
 		)]" />
-	</record> -->
+	</record>
 
 	<record
 		id="action_timekeeping_many"
