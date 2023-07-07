@@ -57,14 +57,7 @@ msgstr ""
 "Bạn chưa ghi lại số lượng <i>đã hoàn tất</i>, bằng cách nhấp vào <i>áp "
 "dụng</i> hệ thống sẽ xử lý toàn bộ số lượng."
 
-#: model:ir.model,name:stock.model_stock_picking
-#: model:ir.model.fields,field_description:stock.field_stock_backorder_confirmation_line__picking_id
-#: model:ir.model.fields,field_description:stock.field_stock_immediate_transfer_line__picking_id
-#: model:ir.model.fields,field_description:stock.field_stock_move__picking_id
-#: model:ir.model.fields,field_description:stock.field_stock_move_line__picking_id
-#: model_terms:ir.ui.view,arch_db:stock.stock_move_line_view_search
-#: model_terms:ir.ui.view,arch_db:stock.stock_scrap_search_view
-#: model_terms:ir.ui.view,arch_db:stock.view_picking_form
-#: model_terms:ir.ui.view,arch_db:stock.view_picking_internal_search
+#. module: stock
+#: model:ir.actions.act_window,name:stock.action_picking_tree_all
 msgid "Transfer"
 msgstr "Phiếu xuất hàng"
