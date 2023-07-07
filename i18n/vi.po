@@ -47,3 +47,12 @@ msgstr "Xuất hàng"
 #: model_terms:ir.ui.view,arch_db:stock.view_template_property_form
 msgid "Operations"
 msgstr "Danh sách mã hàng"
+
+#. module: stock
+#: model_terms:ir.ui.view,arch_db:stock.view_immediate_transfer
+msgid ""
+"You have not recorded <i>done</i> quantities yet, by clicking on "
+"<i>apply</i> Odoo will process all the quantities."
+msgstr ""
+"Bạn chưa ghi lại số lượng <i>đã hoàn tất</i>, bằng cách nhấp vào <i>áp "
+"dụng</i> hệ thống sẽ xử lý toàn bộ số lượng."
