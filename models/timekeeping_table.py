@@ -34,7 +34,7 @@ class Timekeeping(models.Model):
     order_line_id = fields.Many2one(
         "sale.order.line",
         track_visibility="always",
-        string="Sản phẩm",
+        string="Mã hàng",
     )
     quantity = fields.Integer(
         track_visibility="always",
@@ -68,6 +68,7 @@ class Timekeeping(models.Model):
     )
     reason = fields.Many2one(
         "timekeeping.reason",
+        string="Lý do"
     )
     note = fields.Char(
         string="Ghi chú",
