@@ -15,8 +15,8 @@
 		<field name="groups_id" eval="[(6, 0, 
 		[ref('timekeeping_app.timekeeping_group_user'),
 		ref('timekeeping_app.timekeeping_group_manager'),
-		ref('timekeeping_app.timekeeping_group_super_user')]
-		)]" />
+		ref('timekeeping_app.timekeeping_group_super_user')
+		])]" />
 	</record>
 
 	<record
