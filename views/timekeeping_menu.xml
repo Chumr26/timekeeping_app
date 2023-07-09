@@ -5,6 +5,7 @@
 			<field name="name">Bảng sản lượng</field>
 			<field name="res_model">timekeeping.table</field>
 			<field name="view_mode">tree,form</field>
+			<field name="context">{"params": {'model': 'timekeeping.table'}}</field>
 		</record>
 		<!-- Timekeeping App Menu -->
 		<!-- Menu item to open the Book list -->
@@ -19,6 +20,7 @@
 			<field name="res_model">timekeeping.many</field>
 			<field name="view_mode">form</field>
 			<field name="views">view_form_many</field>
+			<field name="context">{'params': {'model': 'timekeeping.many'}}</field>
 		</record>
 		<menuitem id="menu_timekeeping_many"
 			name="Ghi nhanh"

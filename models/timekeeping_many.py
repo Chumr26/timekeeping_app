@@ -10,21 +10,17 @@ class Many(models.Model):
         "worker_id",
         required=True,
         ondelete="cascade",
-
     )
     date = fields.Date(
         default=lambda self: fields.Date.today(),
         string="Ngày",
-
     )
-
     company_id = fields.Many2one(
         "res.company",
         required=True,
         string="Xưởng",
     )
 
-    # company_id = fields.Many2one(
-    #     related='line_ids.company_id',
-    #     required=True,
-    # )
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        self.line_ids = False

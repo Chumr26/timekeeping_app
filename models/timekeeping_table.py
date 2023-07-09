@@ -7,6 +7,15 @@ class Timekeeping(models.Model):
     _description = "Timekeeping"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
+    order_id = fields.Many2one(
+        "sale.order",
+        string="Đơn hàng",
+    )
+    order_line_id = fields.Many2one(
+        "sale.order.line",
+        track_visibility="always",
+        string="Mã hàng",
+    )
     employee_id = fields.Many2one(
         "hr.employee",
         delegate=True,
@@ -16,25 +25,15 @@ class Timekeeping(models.Model):
         string="Nhân viên",
     )
 
-    partner_id = fields.Many2one(
-        "res.partner",
-        # required=True,
-        track_visibility="always",
-        string="Khách hàng",
-    )
-
     company_id = fields.Many2one(
         "res.company",
-        required=True,
         string="Xưởng",
     )
-    # product_id = fields.Many2one('product.template', string='Product')
-    list_price = fields.Float(string='Đơn giá', related='order_line_id.product_id.list_price',
-                              readonly=True, groups='timekeeping_app.timekeeping_group_manager')
-    order_line_id = fields.Many2one(
-        "sale.order.line",
-        track_visibility="always",
-        string="Mã hàng",
+    list_price = fields.Float(
+        string='Đơn giá',
+        readonly=True,
+        related='order_line_id.product_id.list_price',
+        groups='timekeeping_app.timekeeping_group_manager'
     )
     quantity = fields.Integer(
         track_visibility="always",
@@ -53,7 +52,8 @@ class Timekeeping(models.Model):
     )
     currency_id = fields.Many2one(
         'res.currency',
-        default=lambda self: self.env.company.currency_id.id)
+        default=lambda self: self.env.company.currency_id.id
+    )
     location_id = fields.Many2one(
         "stock.location",
         default=8,
@@ -74,11 +74,7 @@ class Timekeeping(models.Model):
         string="Ghi chú",
         widget="textarea",
     )
-    order_id = fields.Many2one(
-        "sale.order",
-        string="Đơn hàng",
-        # domain="[('partner_id', '=', partner_id)]"
-    )
+
     @api.constrains('date')
     def _check_date(self):
         for rec in self:
@@ -91,24 +87,12 @@ class Timekeeping(models.Model):
             if record.quantity < 0:
                 raise ValidationError("Not allow positive number!")
 
-    @api.constrains('employee_id', 'company_id', 'partner_id')
-    def _check_partner_company(self):
-        for record in self:
-            if record.employee_id and record.partner_id:
-                if record.employee_id.company_id != record.partner_id.company_id:
-                    raise ValidationError(
-                        "Selected partner must belong to the selected company.")
-            elif record.employee_id and not record.partner_id:
-                if record.employee_id.company_id != record.company_id:
-                    raise ValidationError(
-                        "Selected employee must belong to the selected company.")
-
     @api.onchange('employee_id')
     def onchange_employee_id(self):
         if self.employee_id:
             self.company_id = self.employee_id.company_id.id
 
-    @ api.depends("order_line_id.product_id.list_price", "quantity")
+    @api.depends("order_line_id.product_id.list_price", "quantity")
     def _compute_pay(self):
         for product in self:
             product.pay = product.order_line_id.product_id.list_price * product.quantity
@@ -135,13 +119,16 @@ class Timekeeping(models.Model):
     @api.onchange('order_id')
     def _onchange_order_id(self):
         # Clear the values of dependent fields
-        self.order_line_id = False
-        self.quantity = False
-        self.reason = False
-        self.image_1920 = False
-        self.note = False
+        if self.order_id:
+            self.order_line_id = False
+            self.quantity = False
+            self.reason = False
+            self.image_1920 = False
+            self.note = ""
 
-    # @api.onchange('company_id')
-    # def _onchange_company_id(self):
-    #     # Clear the values of dependent fields
-    #     self.employee_id = False
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        # Clear the values of dependent fields
+        if self._context.get('params', {}).get('model') == 'timekeeping.table':
+            if self.company_id:
+                self.employee_id = False
