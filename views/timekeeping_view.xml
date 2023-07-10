@@ -9,9 +9,8 @@
 				<sheet>
 					<group name="group_top">
 						<group name="group_left">
-							<!-- <field name="partner_id" invisible="1"/> -->
-							<field name="order_id" options="{'no_create': True}" domain="[('state', '=', 'sale')]"
-								required="True" />
+							<field name="order_id" options="{'no_create': True}"
+								domain="[('state', '=', 'sale')]" required="True" />
 							<field name="order_line_id" options="{'no_create': True}"
 								domain="[('order_id', '=', order_id)]" required="True" />
 							<field name="quantity" />
@@ -21,9 +20,9 @@
 							<group name="group_left">
 								<field name="date" />
 								<field name="company_id" options="{'no_create': True}"
-									domain="[('parent_id', '!=', False)]" />
-								<field name="employee_id" domain="[('company_id', '=', company_id)]"
-									options="{'no_create': True}" />
+									domain="[('parent_id', '!=', False)]" readonly="False" />
+								<field name="employee_id" options="{'no_create': True}"
+									domain="[('company_id', '=', company_id)]" />
 							</group>
 							<group name="group_right">
 								<field name="image_1920" widget="image" />
@@ -57,43 +56,11 @@
 				<field name="order_line_id" width="80" />
 				<field name="quantity" width="80" />
 				<field name="list_price" width="80" />
-				<field name="pay" widget="monetary" width="80" options="{'currency_field': 'currency_id'}"
-					sum="Total Pay" />
+				<field name="pay" widget="monetary" width="80" sum="Total Pay"
+					options="{'currency_field': 'currency_id'}" />
 				<!-- must put it here to show the sympol -->
 				<field name="currency_id" invisible="1" />
 			</tree>
-		</field>
-	</record>
-	<!-- view for timekeeping.many -->
-	<record id="view_form_many" model="ir.ui.view">
-		<field name="name">Many Form</field>
-		<field name="model">timekeeping.many</field>
-		<field name="arch" type="xml">
-			<form>
-				<sheet>
-					<group>
-						<group>
-							<field name="company_id" readonly="False"/>
-						</group>
-						<group>
-							<field name="date" width="120" readonly="True"/>
-						</group>
-					</group>
-					<field name="line_ids">
-						<tree editable="bottom">
-							<field name="employee_id" width="100" required="True" options="{'no_create': True}"
-								domain="[('company_id', '=', parent.company_id)]"
-								context="{'default_company_id': company_id}" />
-							<field name="company_id" width="120" readonly="True" widget="selection" />
-							<field name="order_id" required="True" width="80" options="{'no_create': True}"
-								domain="[('state', '=', 'sale')]" />
-							<field name="order_line_id" required="True" width="80" options="{'no_create': True}"
-								domain="[('order_id', '=', order_id)]" />
-							<field name="quantity" width="40" />
-						</tree>
-					</field>
-				</sheet>
-			</form>
 		</field>
 	</record>
 	<!-- view for timekeeping.reason -->

@@ -5,29 +5,22 @@
 			<field name="name">Bảng sản lượng</field>
 			<field name="res_model">timekeeping.table</field>
 			<field name="view_mode">tree,form</field>
+			<field name="context">{"params": {'model': 'timekeeping.table'}}</field>
 		</record>
 		<!-- Timekeeping App Menu -->
 		<!-- Menu item to open the Book list -->
-		<menuitem id="menu_timekeeping_table"
-			name="Sản lượng"
+		<menuitem id="menu_timekeeping_table" name="Sản lượng"
 			action="action_timekeeping_table"
-		/>
-		<record id="menu_timekeeping_table" model="ir.ui.menu">
-			<field name="groups_id"
-				eval="[(6, 0, 
-		[ref('timekeeping_app.timekeeping_group_user'),
-		ref('timekeeping_app.timekeeping_group_manager'),
-		ref('timekeeping_app.timekeeping_group_super_user')
-		])]" />
-		</record>
+			groups="timekeeping_app.timekeeping_group_user,timekeeping_app.timekeeping_group_manager,timekeeping_app.timekeeping_group_super_user" />
 
 		<record
 			id="action_timekeeping_many"
 			model="ir.actions.act_window">
 			<field name="name">Ghi nhanh</field>
 			<field name="res_model">timekeeping.many</field>
-			<field name="view_mode">form</field>
+			<field name="view_mode">tree,form</field>
 			<field name="views">view_form_many</field>
+			<field name="context">{'params': {'model': 'timekeeping.many'}}</field>
 		</record>
 		<menuitem id="menu_timekeeping_many"
 			name="Ghi nhanh"

@@ -24,6 +24,7 @@
         'security/ir.model.access.csv',
         'views/timekeeping_menu.xml',
         'views/timekeeping_view.xml',
+        'views/many_view.xml',
         'views/employee.xml',
         'views/stock_edit.xml',
     ],
