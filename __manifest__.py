@@ -26,6 +26,6 @@
         'views/timekeeping_view.xml',
         'views/many_view.xml',
         'views/employee.xml',
-        'views/stock_edit.xml',
+        'views/transfer_edit.xml',
     ],
 }
