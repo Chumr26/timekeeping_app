@@ -49,9 +49,14 @@ class Timekeeping(models.Model):
     )
     # field này dùng cho filter
     quarter = fields.Integer(
-        compute="_compute_quarter",
+        compute="_compute_date_filter",
         store=True
     )
+    # field này dùng cho filter
+    # year = fields.Integer(
+    #     compute="_compute_date_filter",
+    #     store=True
+    # )
     pay = fields.Float(
         compute="_compute_pay",
         store=True,
@@ -141,7 +146,8 @@ class Timekeeping(models.Model):
             if self.company_id:
                 self.employee_id = False
 
-    @api.depends("date")
-    def _compute_quarter(self):
-        for rc in self:
-            rc.quarter = (rc.date.month - 1) // 3 + 1
+    # @api.depends("date")
+    # def _compute_date_filter(self):
+    #     for rc in self:
+    #         rc.quarter = (rc.date.month - 1) // 3 + 1
+    #         rc.year = rc.date.year
