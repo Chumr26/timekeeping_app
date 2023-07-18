@@ -1,5 +1,8 @@
 from odoo import models, fields, api  # type:ignore
 from odoo.exceptions import ValidationError  # type:ignore
+from dateutil.relativedelta import relativedelta
+from datetime import date
+import calendar
 
 
 class Timekeeping(models.Model):
@@ -43,6 +46,11 @@ class Timekeeping(models.Model):
         default=lambda self: fields.Date.today(),
         track_visibility="always",
         string="Ngày",
+    )
+    # field này dùng cho filter
+    quarter = fields.Integer(
+        compute="_compute_quarter",
+        store=True
     )
     pay = fields.Float(
         compute="_compute_pay",
@@ -132,3 +140,8 @@ class Timekeeping(models.Model):
         if self._context.get('params', {}).get('model') == 'timekeeping.table':
             if self.company_id:
                 self.employee_id = False
+
+    @api.depends("date")
+    def _compute_quarter(self):
+        for rc in self:
+            rc.quarter = (rc.date.month - 1) // 3 + 1
