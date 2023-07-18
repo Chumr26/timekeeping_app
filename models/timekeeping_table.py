@@ -146,8 +146,8 @@ class Timekeeping(models.Model):
             if self.company_id:
                 self.employee_id = False
 
-    # @api.depends("date")
-    # def _compute_date_filter(self):
-    #     for rc in self:
-    #         rc.quarter = (rc.date.month - 1) // 3 + 1
-    #         rc.year = rc.date.year
+    @api.depends("date")
+    def _compute_date_filter(self):
+        for rc in self:
+            rc.quarter = (rc.date.month - 1) // 3 + 1
+            # rc.year = rc.date.year
