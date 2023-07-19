@@ -6,6 +6,9 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form" />
     <field name="arch" type="xml">
+      <tree position="attributes">
+        <attribute name="create">false</attribute>
+      </tree>
       <xpath expr="//tree/field[@name='description_picking']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
@@ -27,15 +30,18 @@
         <attribute name="attrs"/>
         <attribute name="invisible">1</attribute>
       </button>
+      <button name="325" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </button>
       <page name="extra" position="attributes">
         <attribute name="invisible">1</attribute>
       </page>
       <page name="note" position="attributes">
         <attribute name="invisible">1</attribute>
       </page>
-      <tree position="attributes">
-        <attribute name="create">false</attribute>
-      </tree>
+      <xpath expr="//tree/field[@name='product_id']" position="attributes">
+        <attribute name="string">Mã hàng</attribute>
+      </xpath>
     </field>
   </record>
 <!-- Tree view -->
@@ -44,6 +50,9 @@
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.vpicktree" />
     <field name="arch" type="xml">
+      <tree position="attributes">
+        <attribute name="create">false</attribute>
+      </tree>
       <xpath expr="//field[@name='name']" position="attributes">
         <attribute name="string">Phiếu xuất hàng</attribute>
       </xpath>
@@ -69,9 +78,6 @@
       <xpath expr="//tree/field[@name='products_availability']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
-      <tree position="attributes">
-        <attribute name="create">false</attribute>
-      </tree>
     </field>
   </record>
 </odoo>
