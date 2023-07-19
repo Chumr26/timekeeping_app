@@ -7,7 +7,7 @@ import calendar
 
 class Timekeeping(models.Model):
     _name = "timekeeping.table"
-    _description = "Timekeeping"
+    _description = "Bảng sản lượng"
     _inherit = ["mail.thread", "mail.activity.mixin"]
 
     order_id = fields.Many2one(
