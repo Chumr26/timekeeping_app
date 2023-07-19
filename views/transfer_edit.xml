@@ -30,9 +30,10 @@
         <attribute name="attrs"/>
         <attribute name="invisible">1</attribute>
       </button>
-      <button name="325" position="attributes">
+      <!-- xóa nút trả hàng -->
+      <xpath expr="//button[10]" position="attributes">
         <attribute name="invisible">1</attribute>
-      </button>
+      </xpath>
       <page name="extra" position="attributes">
         <attribute name="invisible">1</attribute>
       </page>
