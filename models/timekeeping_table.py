@@ -111,9 +111,9 @@ class Timekeeping(models.Model):
             product.pay = product.order_line_id.product_id.list_price * product.quantity
 
     # update quantity onhand
-    @ api.onchange("quantity")
+    @api.onchange("quantity")
     def _onchange_quantity(self):
-        if self.quantity != 0:
+        if self.quantity != 0 and self.order_line_id:
             quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
             if self._origin.id and quant:
