@@ -16,7 +16,7 @@
     'application': True,
 
     # any module necessary for this one to work correctly
-    'depends': ['product', 'mail', 'stock', 'hr', 'sale'],
+    'depends': ['mail', 'stock', 'product', 'hr', 'sale'],# 
 
     # always loaded
     'data': [
@@ -24,7 +24,8 @@
         'security/ir.model.access.csv',
         'views/timekeeping_menu.xml',
         'views/timekeeping_view.xml',
+        'views/many_view.xml',
         'views/employee.xml',
-        'views/stock_edit.xml',
+        'views/transfer_edit.xml',
     ],
 }

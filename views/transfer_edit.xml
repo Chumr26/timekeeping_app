@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!-- Form view -->
   <record id="view_picking_form_edit" model="ir.ui.view">
     <field name="name">View picking form edit</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.view_picking_form" />
     <field name="arch" type="xml">
+      <tree position="attributes">
+        <attribute name="create">false</attribute>
+      </tree>
       <xpath expr="//tree/field[@name='description_picking']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
@@ -26,32 +30,37 @@
         <attribute name="attrs"/>
         <attribute name="invisible">1</attribute>
       </button>
+      <!-- xóa nút trả hàng -->
+      <xpath expr="//button[10]" position="attributes">
+        <attribute name="invisible">1</attribute>
+      </xpath>
       <page name="extra" position="attributes">
         <attribute name="invisible">1</attribute>
       </page>
       <page name="note" position="attributes">
         <attribute name="invisible">1</attribute>
       </page>
-      <tree position="attributes">
-        <attribute name="create">false</attribute>
-      </tree>
+      <xpath expr="//tree/field[@name='product_id']" position="attributes">
+        <attribute name="string">Mã hàng</attribute>
+      </xpath>
     </field>
   </record>
-
+<!-- Tree view -->
   <record id="view_vpick_tree_edit" model="ir.ui.view">
     <field name="name">View vpick tree edit</field>
     <field name="model">stock.picking</field>
     <field name="inherit_id" ref="stock.vpicktree" />
     <field name="arch" type="xml">
+      <tree position="attributes">
+        <attribute name="create">false</attribute>
+      </tree>
       <xpath expr="//field[@name='name']" position="attributes">
         <attribute name="string">Phiếu xuất hàng</attribute>
       </xpath>
-
       <xpath expr="//field[@name='date_done']" position="attributes">
-        <attribute name="string">Đã xuất hàng</attribute>
+        <attribute name="string">Đã xuất ngày</attribute>
         <attribute name="widget">date</attribute>
       </xpath>
-
       <xpath expr="//tree/field[@name='partner_id']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
@@ -70,9 +79,6 @@
       <xpath expr="//tree/field[@name='products_availability']" position="attributes">
         <attribute name="invisible">1</attribute>
       </xpath>
-
-      <!-- Điều chuyển hàng -> Phiếu xuất hàng -->
-
     </field>
   </record>
 </odoo>

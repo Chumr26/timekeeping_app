@@ -10,16 +10,24 @@ class Many(models.Model):
         "worker_id",
         required=True,
         ondelete="cascade",
-
     )
     date = fields.Date(
-        related='line_ids.date',
-        # default=lambda self: fields.Date.today(),
+        default=lambda self: fields.Date.today(),
         string="Ngày",
-
     )
-
     company_id = fields.Many2one(
-        related='line_ids.company_id',
+        "res.company",
         required=True,
+        string="Xưởng",
     )
+
+    @api.onchange('company_id')
+    def _onchange_company_id(self):
+        self.line_ids = False
+
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = "Bảng ghi nhanh số " + str(rec.id)
+            result.append((rec.id, name))
+        return result
