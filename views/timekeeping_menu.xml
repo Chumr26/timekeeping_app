@@ -49,7 +49,7 @@
 		<!-- menu employee-->
 		<!-- bỏ nhóm internal user trong menu employee -->
 		<record id="hr.menu_hr_root" model="ir.ui.menu">
-			<field name="groups_id" eval="[(3, ref('base.group_user'))]" />
+			<field name="groups_id" eval="[(3, ref('base.group_user')),(3, ref('hr.group_hr_user'))]" />
 		</record>
 	</data>
 </odoo>
