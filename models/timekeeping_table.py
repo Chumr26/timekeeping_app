@@ -92,7 +92,9 @@ class Timekeeping(models.Model):
     def _check_date(self):
         for rec in self:
             if rec.order_id and rec.date < rec.order_id.date_order.date():
-                raise ValidationError("Invalid date!")
+                raise ValidationError(
+                    f"Ngày {rec.date} không hợp lệ!\n Phải bắt đầu từ ngày {rec.order_id.date_order.date()}"
+                    )
 
     @api.constrains('quantity')
     def _check_quantity(self):
@@ -113,15 +115,19 @@ class Timekeeping(models.Model):
     # update quantity onhand
     @api.onchange("quantity")
     def _onchange_quantity(self):
-        if self.quantity != 0 and self.order_line_id:
+        # nếu sản phẩm được nhập
+        if self.order_line_id:
             quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
+            # nếu record đã được lưu và tìm được số lượng của sản phẩm đó
             if self._origin.id and quant:
                 total_quantity = quant.quantity - self._origin.quantity + self.quantity
                 quant.write({"quantity": total_quantity})
+            # nếu record lần đầu được tạo
             elif quant:
                 total_quantity = quant.quantity + self.quantity
                 quant.write({"quantity": total_quantity})
+            # nếu record số lượng chưa được tạo
             else:
                 self.env["stock.quant"].create({
                     "product_id": self.order_line_id.product_id.id,
