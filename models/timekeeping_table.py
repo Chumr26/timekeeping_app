@@ -135,6 +135,32 @@ class Timekeeping(models.Model):
                     "location_id": self.location_id.id
                 })
 
+    # khi đổi tên mã hàng
+    @api.onchange("order_line_id")
+    def _onchange_order_line_id(self):
+        if self.order_line_id:
+            # tìm mã hàng trước đó
+            pr_product = self.env["stock.quant"].search(
+                [("product_id", "=", self._origin.order_line_id.product_id.id)], limit=1)
+            # trừ số lượng được nhập của mã hàng trước đó
+            pr_product_quantity = pr_product.quantity - self._origin.quantity
+            pr_product.write({"quantity": pr_product_quantity})
+
+
+            # tìm mã hàng hiện tại
+            cr_product = self.env["stock.quant"].search(
+                [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
+            # cập nhật số lượng cho mã hàng hiện tại
+            if cr_product:
+                cr_product_quantity = cr_product.quantity + self.quantity
+                cr_product.write({"quantity": cr_product_quantity})
+            else:
+                self.env["stock.quant"].create({
+                    "product_id": self.order_line_id.product_id.id,
+                    "quantity": self.quantity,
+                    "location_id": self.location_id.id
+                })
+
     @api.onchange('order_id')
     def _onchange_order_id(self):
         # Clear the values of dependent fields
