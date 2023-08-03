@@ -92,7 +92,9 @@ class Timekeeping(models.Model):
     def _check_date(self):
         for rec in self:
             if rec.order_id and rec.date < rec.order_id.date_order.date():
-                raise ValidationError("Invalid date!")
+                raise ValidationError(
+                    f"Ngày {rec.date} không hợp lệ!\n Phải bắt đầu từ ngày {rec.order_id.date_order.date()}"
+                    )
 
     @api.constrains('quantity')
     def _check_quantity(self):
@@ -113,15 +115,45 @@ class Timekeeping(models.Model):
     # update quantity onhand
     @api.onchange("quantity")
     def _onchange_quantity(self):
-        if self.quantity != 0 and self.order_line_id:
+        # nếu sản phẩm được nhập
+        if self.order_line_id:
             quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
+            # nếu record đã được lưu và tìm được số lượng của sản phẩm đó
             if self._origin.id and quant:
                 total_quantity = quant.quantity - self._origin.quantity + self.quantity
                 quant.write({"quantity": total_quantity})
+            # nếu record lần đầu được tạo
             elif quant:
                 total_quantity = quant.quantity + self.quantity
                 quant.write({"quantity": total_quantity})
+            # nếu record số lượng chưa được tạo
+            else:
+                self.env["stock.quant"].create({
+                    "product_id": self.order_line_id.product_id.id,
+                    "quantity": self.quantity,
+                    "location_id": self.location_id.id
+                })
+
+    # khi đổi tên mã hàng
+    @api.onchange("order_line_id")
+    def _onchange_order_line_id(self):
+        if self.order_line_id:
+            # tìm mã hàng trước đó
+            pr_product = self.env["stock.quant"].search(
+                [("product_id", "=", self._origin.order_line_id.product_id.id)], limit=1)
+            # trừ số lượng được nhập của mã hàng trước đó
+            pr_product_quantity = pr_product.quantity - self._origin.quantity
+            pr_product.write({"quantity": pr_product_quantity})
+
+
+            # tìm mã hàng hiện tại
+            cr_product = self.env["stock.quant"].search(
+                [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
+            # cập nhật số lượng cho mã hàng hiện tại
+            if cr_product:
+                cr_product_quantity = cr_product.quantity + self.quantity
+                cr_product.write({"quantity": cr_product_quantity})
             else:
                 self.env["stock.quant"].create({
                     "product_id": self.order_line_id.product_id.id,
