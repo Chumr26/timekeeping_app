@@ -195,8 +195,6 @@ class Timekeeping(models.Model):
         for record in results:
             self_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", record.order_line_id.product_id.id)], limit=1)
-            # self_product_quant = self.search_self_product_quant(record)
-
             if self_product_quant:
                 new_total = self_product_quant.quantity + record.quantity
                 self_product_quant.write({"quantity": new_total})
@@ -207,41 +205,14 @@ class Timekeeping(models.Model):
                     "quantity": record.quantity,
                     "location_id": record.location_id.id
                 })
-                # self.create_self_product_quant(record)
         return results
     
-    # def create_self_product_quant(self, param):
-    #     self.env["stock.quant"].create({
-    #                 "product_id": param.order_line_id.product_id.id,
-    #                 "quantity": param.quantity,
-    #                 "location_id": param.location_id.id
-    #             })
-    # def create_vals_product_quant(self, vals):
-    #     self.env["stock.quant"].create({
-    #                 "product_id": self.search_vals_product_id(vals),
-    #                 "quantity": vals['quantity'],
-    #                 "location_id": self.location_id.id
-    #             })
-    # def search_self_product_quant(self, param):
-    #     return self.env["stock.quant"].search(
-    #             [("product_id", "=", param.order_line_id.product_id.id)], limit=1)
-    # def search_vals_product_id(self, vals):
-    #     # id của mã hàng mới
-    #     return self.env['sale.order.line'].browse([vals['order_line_id']]).product_id.id
-    # def search_vals_product_quant(self, vals):
-    #     vals_product_id = self.search_vals_product_id(vals)
-    #     # tìm rc số lượng mã hàng mới
-    #     return self.env["stock.quant"].search(
-    #         [("product_id", "=", vals_product_id)], limit=1)
-
 
     def write(self, vals):
-        logging.critical("có write")
         if "order_line_id" in vals and "quantity" in vals:
             # tìm rc số lượng mã hàng cũ
             old_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
-            # old_product_quant = self.search_self_product_quant(self)
             # trừ số lượng được nhập của mã hàng cũ
             new_total = old_product_quant.quantity - self.quantity
             old_product_quant.write({"quantity": new_total})
@@ -250,7 +221,6 @@ class Timekeeping(models.Model):
             # tìm rc số lượng mã hàng mới
             new_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", new_product_id)], limit=1)
-            # new_product_quant = self.search_vals_product_quant(vals)
             # cập nhật số lượng cho mã hàng mới
             if new_product_quant:
                 new_total = new_product_quant.quantity + vals['quantity']
@@ -261,15 +231,11 @@ class Timekeeping(models.Model):
                     "quantity": vals['quantity'],
                     "location_id": self.location_id.id
                 })
-                # self.create_vals_product_quant(vals)
-            
-   
-
+                
         elif "quantity" in vals:
             # tìm rc số lượng mã hàng cũ
             old_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
-            # old_product_quant = self.search_self_product_quant(self)
             new_total = old_product_quant.quantity - self.quantity + vals['quantity']
             old_product_quant.write({"quantity": new_total})
 
@@ -277,7 +243,6 @@ class Timekeeping(models.Model):
             # tìm rc số lượng mã hàng cũ
             old_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", self.order_line_id.product_id.id)], limit=1)
-            # old_product_quant = self.search_self_product_quant(self)
             # trừ số lượng được nhập của mã hàng cũ
             new_total = old_product_quant.quantity - self.quantity
             old_product_quant.write({"quantity": new_total})
@@ -286,7 +251,6 @@ class Timekeeping(models.Model):
             # tìm rc số lượng mã hàng mới
             new_product_quant = self.env["stock.quant"].search(
                 [("product_id", "=", new_product_id)], limit=1)
-            # new_product_quant = self.search_vals_product_quant(vals)
             # cập nhật số lượng cho mã hàng mới
             if new_product_quant:
                 new_total = new_product_quant.quantity + self.quantity
@@ -297,5 +261,4 @@ class Timekeeping(models.Model):
                     "quantity": self.quantity,
                     "location_id": self.location_id.id
                 })
-                # self.create_vals_product_quant(vals)
         super().write(vals)
