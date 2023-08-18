@@ -84,6 +84,8 @@
 				<!-- Filters -->
 				<filter string="Hôm nay" name="filter_today"
 					domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<filter string="Hôm qua" name="filter_yesterday"
+					domain="[('date', '=', 'yesterday')]" />
 				<filter string="Tuần này" name="current_week"
 					domain="[
 						('date', '&lt;=', ((context_today()+relativedelta(weeks=0, weekday=-1)).strftime('%Y-%m-%d'))),   
@@ -96,7 +98,7 @@
 					]" />
 				<filter string="Quý này" name="current_quarter"
 					domain="[('quarter', '=', (context_today().month - 1) // 3 + 1)]" />
-				<!-- <filter string="Năm này" name="current_year" domain="[('year', '=', context_today().year]" /> -->
+				<filter string="Năm này" name="current_year" domain="[('current_year', '=', context_today().year)]" />
 				<!-- GroupBy -->
 				<group expand="1" string="Group By">
 					<filter string="Xưởng" name="company" context="{'group_by':'company_id'}" />
